@@ -3898,6 +3898,7 @@ function PageAlliance() {
         totalAbsent = 0;
         totalDisparu = 0;
         totalVacance = 0;
+        totalBani = 0;
         totalColonise = 0;
         pseudo = $("#pseudo").text();
         terrain = $("#quantite_tdc").text();
@@ -3919,6 +3920,9 @@ function PageAlliance() {
             if ($(this).find("td:eq(7)").find("img[alt='Vacances']").length) {
                 totalVacance += 1
             }
+            if ($(this).find("td:eq(7)").find("img[alt='Bannie']").length) {
+                totalBani += 1
+            }
             if ($(this).find("td:eq(8)").find("img[alt='Colonisé']").length) {
                 totalColonise += 1
             }
@@ -3930,6 +3934,7 @@ function PageAlliance() {
         $(".simulateur table[class='ligne_paire'] tr:eq(0) td:eq(1)").append("  (" + totalActif + ")");
         $(".simulateur table[class='ligne_paire'] tr:eq(0) td:eq(3)").append("  (" + totalVacance + ")");
         $(".simulateur table[class='ligne_paire'] tr:eq(1) td:eq(1)").append("  (" + totalAbsent + ")");
+        $(".simulateur table[class='ligne_paire'] tr:eq(1) td:eq(3)").append("  (" + totalBani + ")");
         $(".simulateur table[class='ligne_paire'] tr:eq(2) td:eq(1)").append("  (" + totalDisparu + ")");
         $(".simulateur table[class='ligne_paire'] tr:eq(2) td:eq(3)").append("  (" + totalColonise + ")");
         if ($("#tabMembresAlliance tr").length % 2 == 0) {
