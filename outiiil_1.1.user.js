@@ -5,7 +5,379 @@
 // @name           Outiiil - 1.1
 // @namespace      http://www.outiiil.fr/
 // @version        1.1
+// @require        http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+// @require        http://code.jquery.com/ui/1.10.1/jquery-ui.js
 // ==/UserScript==
+
+style = " \
+#centre { \
+	padding-top: 35px !important; \
+	text-align: center !important; \
+} \
+ \
+.scroll { \
+	color: green; \
+	cursor: pointer; \
+	display: block; \
+	padding: 5px 10px; \
+	text-align: right; \
+	text-transform: uppercase; \
+	font-weight: bold; \
+} \
+ \
+#top { \
+	border-top: 1px solid black; \
+	border-right: 5px solid black; \
+} \
+ \
+#bottom { \
+	border-bottom: 1px solid black; \
+	border-right: 5px solid black; \
+} \
+ \
+.boite_info tr,.boite_compte_plus tr { \
+	height: 24px !important; \
+} \
+ \
+.boite_info td,.boite_compte_plus td { \
+	font-size: 1em !important; \
+} \
+ \
+#headTerrain { \
+	width: 110px !important; \
+} \
+ \
+.icone_loupe { \
+	margin-left: 5px !important; \
+	margin-top: -10px !important; \
+} \
+ \
+.tableau_leger,.tab_triable { \
+	margin: auto; \
+} \
+ \
+.desciption_amelioration,.info { \
+	padding-right: 5px; \
+	text-align: justify !important; \
+} \
+ \
+.my_boite { \
+	border: 1px solid #665832; \
+	padding: 0 50px !important; \
+	min-width: 728px; \
+} \
+ \
+.my_tab { \
+	border: 1px solid #665832; \
+	padding: 0 50px !important; \
+	min-width: 100%; \
+} \
+ \
+.black { \
+	color: black; \
+} \
+ \
+.green { \
+	color: green; \
+} \
+ \
+.red { \
+	color: #c5130f; \
+} \
+ \
+.blue { \
+	color: blue; \
+} \
+ \
+.orange { \
+	color: #9c4b00; \
+} \
+ \
+.violet { \
+	color: #6D3A8A; \
+} \
+ \
+.show { \
+	z-index: 4; \
+} \
+ \
+.cursor { \
+	cursor: pointer; \
+} \
+ \
+.centre { \
+	text-align: center; \
+} \
+ \
+.left { \
+	text-align: left; \
+} \
+ \
+.right { \
+	text-align: right; \
+} \
+ \
+.odd { \
+	background-color: #D7C384 !important; \
+} \
+ \
+.even { \
+	background-color: #C9AD63 !important; \
+} \
+ \
+.tab1 { \
+	margin: 10px auto; \
+	width: 80%; \
+} \
+ \
+.tab2 { \
+	margin: 10px auto; \
+	width: 50%; \
+} \
+ \
+.tab3 { \
+	padding: 10px 40px !important; \
+} \
+ \
+.tab1 tr,.tab2 tr,.tab3 tr { \
+	height: 30px; \
+} \
+ \
+.button_max { \
+	position: relative; \
+	top: 6px; \
+} \
+ \
+.my_input { \
+	width: 200px; \
+} \
+ \
+.retour { \
+	font-size: 0.8em; \
+	font-style: italic; \
+} \
+ \
+.total { \
+	border-top: 1px solid black; \
+} \
+ \
+#tabConvois tfoot { \
+	font-weight: bold; \
+} \
+ \
+#centre>h2,#alliance>.titre { \
+	color: green !important; \
+	text-align: center !important; \
+} \
+ \
+#alliance form,#formulaireChatGeneral { \
+	margin: 0 0 10px; \
+} \
+ \
+#progressbar { \
+	height: 10px !important; \
+} \
+ \
+#recherche,#tabAttaquer { \
+	width: 75%; \
+} \
+ \
+#tabAttaquer .info { \
+	background-color: #c7b178; \
+} \
+ \
+.colorpicker { \
+	width: 356px; \
+	height: 176px; \
+	overflow: hidden; \
+	position: absolute; \
+	background: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_background.png); \
+	font-family: Arial, Helvetica, sans-serif; \
+	display: none; \
+	z-index: 3; \
+} \
+ \
+.colorpicker_color { \
+	width: 150px; \
+	height: 150px; \
+	left: 14px; \
+	top: 13px; \
+	position: absolute; \
+	background: red; \
+	overflow: hidden; \
+	cursor: crosshair; \
+} \
+ \
+.colorpicker_color div { \
+	position: absolute; \
+	top: 0; \
+	left: 0; \
+	width: 150px; \
+	height: 150px; \
+	background: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_overlay.png); \
+} \
+ \
+.colorpicker_color div div { \
+	position: absolute; \
+	top: 0; \
+	left: 0; \
+	width: 11px; \
+	height: 11px; \
+	overflow: hidden; \
+	background: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_select.gif); \
+	margin: -5px 0 0 -5px; \
+} \
+ \
+.colorpicker_hue { \
+	position: absolute; \
+	top: 13px; \
+	left: 171px; \
+	width: 35px; \
+	height: 150px; \
+	cursor: n-resize; \
+} \
+ \
+.colorpicker_hue div { \
+	position: absolute; \
+	width: 35px; \
+	height: 9px; \
+	overflow: hidden; \
+	background: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_indic.gif) left \
+		top; \
+	left: 0; \
+	margin: -4px 0 0; \
+} \
+ \
+.colorpicker_new_color { \
+	position: absolute; \
+	width: 60px; \
+	height: 30px; \
+	left: 213px; \
+	top: 13px; \
+	background: red; \
+} \
+ \
+.colorpicker_current_color { \
+	position: absolute; \
+	width: 60px; \
+	height: 30px; \
+	left: 283px; \
+	top: 13px; \
+	background: red; \
+} \
+ \
+.colorpicker input { \
+	background-color: transparent; \
+	border: 1px solid transparent; \
+	position: absolute; \
+	font-size: 10px; \
+	font-family: Arial, Helvetica, sans-serif; \
+	color: #898989; \
+	top: 4px; \
+	right: 11px; \
+	text-align: right; \
+	height: 11px; \
+	margin: 0; \
+	padding: 0; \
+} \
+ \
+.colorpicker_hex { \
+	position: absolute; \
+	width: 72px; \
+	height: 22px; \
+	background: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_hex.png) top; \
+	left: 212px; \
+	top: 142px; \
+} \
+ \
+.colorpicker_hex input { \
+	right: 6px; \
+} \
+ \
+.colorpicker_field { \
+	height: 22px; \
+	width: 62px; \
+	background-position: top; \
+	position: absolute; \
+} \
+ \
+.colorpicker_field span { \
+	position: absolute; \
+	width: 12px; \
+	height: 22px; \
+	overflow: hidden; \
+	top: 0; \
+	right: 0; \
+	cursor: n-resize; \
+} \
+ \
+.colorpicker_rgb_r { \
+	background-image: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_r.png); \
+	top: 52px; \
+	left: 212px; \
+} \
+ \
+.colorpicker_rgb_g { \
+	background-image: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_g.png); \
+	top: 82px; \
+	left: 212px; \
+} \
+ \
+.colorpicker_rgb_b { \
+	background-image: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_b.png); \
+	top: 112px; \
+	left: 212px; \
+} \
+ \
+.colorpicker_hsb_h { \
+	background-image: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_h.png); \
+	top: 52px; \
+	left: 282px; \
+} \
+ \
+.colorpicker_hsb_s { \
+	background-image: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_s.png); \
+	top: 82px; \
+	left: 282px; \
+} \
+ \
+.colorpicker_hsb_b { \
+	background-image: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_b.png); \
+	top: 112px; \
+	left: 282px; \
+} \
+ \
+.colorpicker_submit { \
+	position: absolute; \
+	width: 22px; \
+	height: 22px; \
+	background: \
+		url(http://outiiil.fr/images/colorpicker/colorpicker_submit.png) top; \
+	left: 322px; \
+	top: 142px; \
+	overflow: hidden; \
+} \
+ \
+.colorpicker_focus { \
+	background-position: center; \
+} \
+ \
+.colorpicker_hex.colorpicker_focus,.colorpicker_submit.colorpicker_focus,.colorpicker_slider { \
+	background-position: bottom; \
+} \
+";
+
 //-----------------------------------------
 //----  Routage                        ----
 //-----------------------------------------
@@ -17,6 +389,9 @@ window.addEventListener('load', function () {
     jTableSorter(jQuery);
     jColorPicker(jQuery);
     jCookies(jQuery);
+
+    //$("head").append('<link rel="stylesheet" type="text/css" href="http://userstyles.org/styles/80741.css" />');
+    GM_addStyle(style);
 
     if (connecte && !comptePlus) {
         box = new Box();
