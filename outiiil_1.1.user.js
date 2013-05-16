@@ -3557,7 +3557,7 @@ function Utilitaire() {
                 contenu += "</tr>"
             }
         }
-        $("#tabConvois").append("<thead class='cursor'><tr class='even'><th>Pseudo</th><th>Type</th><th>Quantité</th><th>&Eacute;tat</th><th>Temps de trajet</th><th>Livrer</th><th>Infos</th></tr></thead>");
+        $("#tabConvois").append("<thead class='cursor'><tr class='even'><th>Pseudo</th><th>Type</th><th>Quantité</th><th>État</th><th>Temps de trajet</th><th>Livrer</th><th>Infos</th></tr></thead>");
         $("#tabConvois").append(contenu);
         if ((j.length + d.length) % 2) {
             $("#tabConvois").append("<tfoot><tr class='even'><td colspan=8>Total : " + formatNumber(total) + " dont : <span class='red'>" + formatNumber(totalRouge) + " en retard !</span></td></tr></tfoot>")
@@ -3845,7 +3845,7 @@ function Utilitaire() {
     };
     this.showDataPlayer = function () {
         color = e.niveau_champi < e.champi ? "green" : "red";
-        $("#tableau_demande").append("<tr class='centre'><td colspan=3><strong>Info : &Agrave; votre niveau une Champignonnière niveau <span class='" + color + "'>" + e.niveau_champi + "</span> est exigée.</strong></td></tr>");
+        $("#tableau_demande").append("<tr class='centre'><td colspan=3><strong>Info : À votre niveau une Champignonnière niveau <span class='" + color + "'>" + e.niveau_champi + "</span> est exigée.</strong></td></tr>");
         $("#tableau_demande").append("<tr class='centre'><td colspan=3><strong>Info : Actuellement vous avez droit à " + formatNumber(e.solde) + " <img src='http://img3.fourmizzz.fr/images/icone/icone_bois.gif'/>.</strong></td></tr>");
         $("#tableau_demande").append("<tr><td colspan=3><strong><div title='Activité : " + e.activite + "%' id='progressbar'></div></strong></td></tr>");
         $("#progressbar").progressbar({
@@ -4547,7 +4547,7 @@ function PageCommerce() {
             }
         }
         selectEvo += "</select>";
-        myForm = "<div class='boite_membre'><span class='titre'>Demander des ressources</span><table id='tableau_demande' class='tab2'><tr><td>&Eacute;volution*</td><td>:</td><td class='left'>" + selectEvo + "</td></tr><tr><td>Pour le*</td><td>:</td><td class='left'><input id='dateDemande' class='my_input' name='date' type='text' /> (format : aaaa-mm-jj)</td></tr><tr><td>&Agrave; Partir du</td><td>:</td><td class='left'><input id='dateDebut' class='my_input' name='dateD' type='text' /> (format : aaaa-mm-jj)</td></tr><tr class='centre'><td colspan=3><input type='button' id='envoyer' value='Envoyer'/></td></tr></table></div>";
+        myForm = "<div class='boite_membre'><span class='titre'>Demander des ressources</span><table id='tableau_demande' class='tab2'><tr><td>Évolution*</td><td>:</td><td class='left'>" + selectEvo + "</td></tr><tr><td>Pour le*</td><td>:</td><td class='left'><input id='dateDemande' class='my_input' name='date' type='text' /> (format : aaaa-mm-jj)</td></tr><tr><td>À partir du</td><td>:</td><td class='left'><input id='dateDebut' class='my_input' name='dateD' type='text' /> (format : aaaa-mm-jj)</td></tr><tr class='centre'><td colspan=3><input type='button' id='envoyer' value='Envoyer'/></td></tr></table></div>";
         $(".boite_membre:last").after(myForm);
         b.__initDataPlayer()
     };
@@ -5042,7 +5042,7 @@ function PageRessource() {
                     }
                 }
             }
-            selectDiff += a.getHuntRatio()[e].toFixed(2) + " &rarr; Rep10% : " + (a.getHuntReply()[e] >= 0.2 ? ((100 * a.getHuntReply()[e]).toFixed(2) + "%") : "< 20%");
+            selectDiff += a.getHuntRatio()[e].toFixed(2) + " → Rep10% : " + (a.getHuntReply()[e] >= 0.2 ? ((100 * a.getHuntReply()[e]).toFixed(2) + "%") : "< 20%");
             selectDiff += "</option>"
         }
         selectNbrChasse = "<select id='nbr_chasse' class='my_input' disabled='true' title='Nombre de chasse compris entre 0 et votre vitesse de chasse + 1'>";
