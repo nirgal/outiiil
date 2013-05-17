@@ -2565,8 +2565,10 @@ function Armee() {
                 error: function (z, x, y) {
                     alert(x)
                 },
-                success: function () {
-                    alert("Flood " + (w++) + "/" + v + " envoyé !")
+                success: function (result) {
+                    res = $('<div>').append(result);
+                    res = res.find("#centre").text().replace(res.find("#centre script").text(), "");
+                    alert("Flood " + (w++) + "/" + v + " envoyé !\n" + res);
                 }
             });
             setTimeout(function () {
