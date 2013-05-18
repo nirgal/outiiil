@@ -4,378 +4,387 @@
 // @match          http://*.fourmizzz.fr/*
 // @name           Outiiil - 1.1
 // @namespace      http://www.outiiil.fr/
-// @version        1.1
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @require        http://code.jquery.com/ui/1.10.1/jquery-ui.js
-// @require        http://img.fourmizzz.fr/script/BBCodeChat.js
+// @require        http://fourmizzz.fr/script/BBCodeChat.js
+// @updateURL      https://userscripts.org/scripts/show/160493
+// @version        1.1
 // ==/UserScript==
 
 style = " \
 #centre { \
-	padding-top: 35px !important; \
-	text-align: center !important; \
+padding-top: 35px !important; \
+text-align: center !important; \
 } \
  \
+#centre > h2,#alliance > .titre { \
+color:green!important; \
+text-align:center!important; \
+} \
+ \
+#formulaireChat{ \
+margin:0 0 10px; \
+} \
+ \
+/* --- Scrollbar --- */ \
+ \
 .scroll { \
-	color: green; \
-	cursor: pointer; \
-	display: block; \
-	padding: 5px 10px; \
-	text-align: right; \
-	text-transform: uppercase; \
-	font-weight: bold; \
+color:green; \
+cursor:pointer; \
+display:block; \
+text-align:right; \
+text-transform:uppercase; \
+font-weight:700; \
+padding:5px 10px; \
 } \
  \
 #top { \
-	border-top: 1px solid black; \
-	border-right: 5px solid black; \
+border-top:1px solid #000; \
+border-right:5px solid #000; \
 } \
  \
 #bottom { \
-	border-bottom: 1px solid black; \
-	border-right: 5px solid black; \
+border-bottom:1px solid #000; \
+border-right:5px solid #000; \
+} \
+ \
+/* --- Boite Info, Compte + --- */ \
+ \
+.show { \
+z-index:4; \
 } \
  \
 .boite_info tr,.boite_compte_plus tr { \
-	height: 24px !important; \
+height:24px!important; \
 } \
  \
 .boite_info td,.boite_compte_plus td { \
-	font-size: 1em !important; \
+font-size:1em!important; \
 } \
  \
-#headTerrain { \
-	width: 110px !important; \
+#boiteAD{ \
+position:absolute; \
+top:400px; \
+left:15px; \
 } \
  \
 .icone_loupe { \
-	margin-left: 5px !important; \
-	margin-top: -10px !important; \
+margin-left:5px!important; \
+margin-top:-10px!important; \
 } \
  \
-.tableau_leger,.tab_triable { \
-	margin: auto; \
-} \
- \
-.desciption_amelioration,.info { \
-	padding-right: 5px; \
-	text-align: justify !important; \
-} \
+/* --- Page ressource --- */ \
  \
 .my_boite { \
-	border: 1px solid #665832; \
-	padding: 0 50px !important; \
-	min-width: 728px; \
+border:1px solid #665832; \
+min-width:728px; \
+padding:0 50px!important; \
 } \
  \
-.my_tab { \
-	border: 1px solid #665832; \
-	padding: 0 50px !important; \
-	min-width: 100%; \
+/* --- Page reine, construction, laboratoire --- */ \
+ \
+.desciption_amelioration{ \
+padding-right:5px; \
+text-align:justify!important; \
 } \
  \
-.black { \
-	color: black; \
-} \
- \
-.green { \
-	color: green; \
-} \
- \
-.red { \
-	color: #c5130f; \
-} \
- \
-.blue { \
-	color: blue; \
-} \
- \
-.orange { \
-	color: #9c4b00; \
-} \
- \
-.violet { \
-	color: #6D3A8A; \
-} \
- \
-.show { \
-	z-index: 4; \
-} \
- \
-.cursor { \
-	cursor: pointer; \
-} \
- \
-.centre { \
-	text-align: center; \
-} \
- \
-.left { \
-	text-align: left; \
-} \
- \
-.right { \
-	text-align: right; \
-} \
- \
-.odd { \
-	background-color: #D7C384 !important; \
-} \
- \
-.even { \
-	background-color: #C9AD63 !important; \
-} \
- \
-.tab1 { \
-	margin: 10px auto; \
-	width: 80%; \
-} \
- \
-.tab2 { \
-	margin: 10px auto; \
-	width: 50%; \
-} \
- \
-.tab3 { \
-	padding: 10px 40px !important; \
-} \
- \
-.tab1 tr,.tab2 tr,.tab3 tr { \
-	height: 30px; \
-} \
- \
-.button_max { \
-	position: relative; \
-	top: 6px; \
-} \
- \
-.my_input { \
-	width: 200px; \
-} \
- \
-.retour { \
-	font-size: 0.8em; \
-	font-style: italic; \
-} \
- \
-.total { \
-	border-top: 1px solid black; \
-} \
+/* --- Page commerce --- */ \
  \
 #tabConvois tfoot { \
-	font-weight: bold; \
-} \
- \
-#centre>h2,#alliance>.titre { \
-	color: green !important; \
-	text-align: center !important; \
-} \
- \
-#alliance form,#formulaireChatGeneral { \
-	margin: 0 0 10px; \
+font-weight:bold; \
 } \
  \
 #progressbar { \
-	height: 10px !important; \
+height:4px!important; \
 } \
  \
-#recherche,#tabAttaquer { \
-	width: 75%; \
+.total { \
+border-top:1px solid #000; \
 } \
  \
-#tabAttaquer .info { \
-	background-color: #c7b178; \
+.tab2 { \
+width:50%; \
+margin:10px auto; \
 } \
+ \
+/* --- Page membre --- */ \
+ \
+#headTerrain, th:nth-child(5){ \
+width:110px!important; \
+} \
+ \
+/* --- Page classement --- */ \
+ \
+.tableau_leger, .tab_triable { \
+margin:auto; \
+} \
+ \
+/* --- Page Attaquer --- */ \
+ \
+.retour { \
+font-size:.8em; \
+font-style:italic; \
+} \
+ \
+/* --- Couleur ---*/ \
+ \
+.black { \
+color:#000; \
+} \
+ \
+.green { \
+color:green; \
+} \
+ \
+.red { \
+color:#c5130f; \
+} \
+ \
+.blue { \
+color:blue; \
+} \
+ \
+.orange { \
+color:#9c4b00; \
+} \
+ \
+.violet { \
+color:#6D3A8A; \
+} \
+ \
+/* --- Element style --- */ \
+ \
+.cursor { \
+cursor:pointer; \
+} \
+ \
+.centre { \
+text-align:center; \
+} \
+ \
+.left { \
+text-align:left; \
+} \
+ \
+.right { \
+text-align:right; \
+} \
+ \
+.odd { \
+background-color:#D7C384!important; \
+} \
+ \
+.even { \
+background-color:#C9AD63!important; \
+} \
+ \
+.button_max { \
+position:relative; \
+top:6px; \
+} \
+ \
+.my_input { \
+width:200px; \
+} \
+ \
+#recherche { \
+width:75%; \
+} \
+ \
+#tabAttaquer, #tabConvois{ \
+width:75%; \
+margin:10px auto; \
+text-align:center; \
+} \
+ \
+.tab1{ \
+width:75%; \
+margin:10px auto; \
+text-align:center; \
+} \
+ \
+#tabAttaquer tr, #tabConvois tr, .tab1 tr, .tab2 tr { \
+height:30px; \
+} \
+ \
+/* --- Color Picker --- */ \
  \
 .colorpicker { \
-	width: 356px; \
-	height: 176px; \
-	overflow: hidden; \
-	position: absolute; \
-	background: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_background.png); \
-	font-family: Arial, Helvetica, sans-serif; \
-	display: none; \
-	z-index: 3; \
+width:356px; \
+height:176px; \
+overflow:hidden; \
+position:absolute; \
+background:url(http://outiiil.fr/images/colorpicker/colorpicker_background.png); \
+font-family:Arial, Helvetica, sans-serif; \
+display:none; \
+z-index:3; \
 } \
  \
 .colorpicker_color { \
-	width: 150px; \
-	height: 150px; \
-	left: 14px; \
-	top: 13px; \
-	position: absolute; \
-	background: red; \
-	overflow: hidden; \
-	cursor: crosshair; \
+width:150px; \
+height:150px; \
+left:14px; \
+top:13px; \
+position:absolute; \
+background:red; \
+overflow:hidden; \
+cursor:crosshair; \
 } \
  \
 .colorpicker_color div { \
-	position: absolute; \
-	top: 0; \
-	left: 0; \
-	width: 150px; \
-	height: 150px; \
-	background: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_overlay.png); \
+position:absolute; \
+top:0; \
+left:0; \
+width:150px; \
+height:150px; \
+background:url(http://outiiil.fr/images/colorpicker/colorpicker_overlay.png); \
 } \
  \
 .colorpicker_color div div { \
-	position: absolute; \
-	top: 0; \
-	left: 0; \
-	width: 11px; \
-	height: 11px; \
-	overflow: hidden; \
-	background: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_select.gif); \
-	margin: -5px 0 0 -5px; \
+position:absolute; \
+top:0; \
+left:0; \
+width:11px; \
+height:11px; \
+overflow:hidden; \
+background:url(http://outiiil.fr/images/colorpicker/colorpicker_select.gif); \
+margin:-5px 0 0 -5px; \
 } \
  \
 .colorpicker_hue { \
-	position: absolute; \
-	top: 13px; \
-	left: 171px; \
-	width: 35px; \
-	height: 150px; \
-	cursor: n-resize; \
+position:absolute; \
+top:13px; \
+left:171px; \
+width:35px; \
+height:150px; \
+cursor:n-resize; \
 } \
  \
 .colorpicker_hue div { \
-	position: absolute; \
-	width: 35px; \
-	height: 9px; \
-	overflow: hidden; \
-	background: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_indic.gif) left \
-		top; \
-	left: 0; \
-	margin: -4px 0 0; \
+position:absolute; \
+width:35px; \
+height:9px; \
+overflow:hidden; \
+background:url(http://outiiil.fr/images/colorpicker/colorpicker_indic.gif) left top; \
+left:0; \
+margin:-4px 0 0; \
 } \
  \
 .colorpicker_new_color { \
-	position: absolute; \
-	width: 60px; \
-	height: 30px; \
-	left: 213px; \
-	top: 13px; \
-	background: red; \
+position:absolute; \
+width:60px; \
+height:30px; \
+left:213px; \
+top:13px; \
+background:red; \
 } \
  \
 .colorpicker_current_color { \
-	position: absolute; \
-	width: 60px; \
-	height: 30px; \
-	left: 283px; \
-	top: 13px; \
-	background: red; \
+position:absolute; \
+width:60px; \
+height:30px; \
+left:283px; \
+top:13px; \
+background:red; \
 } \
  \
 .colorpicker input { \
-	background-color: transparent; \
-	border: 1px solid transparent; \
-	position: absolute; \
-	font-size: 10px; \
-	font-family: Arial, Helvetica, sans-serif; \
-	color: #898989; \
-	top: 4px; \
-	right: 11px; \
-	text-align: right; \
-	height: 11px; \
-	margin: 0; \
-	padding: 0; \
+background-color:transparent; \
+border:1px solid transparent; \
+position:absolute; \
+font-size:10px; \
+font-family:Arial, Helvetica, sans-serif; \
+color:#898989; \
+top:4px; \
+right:11px; \
+text-align:right; \
+height:11px; \
+margin:0; \
+padding:0; \
 } \
  \
 .colorpicker_hex { \
-	position: absolute; \
-	width: 72px; \
-	height: 22px; \
-	background: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_hex.png) top; \
-	left: 212px; \
-	top: 142px; \
+position:absolute; \
+width:72px; \
+height:22px; \
+background:url(http://outiiil.fr/images/colorpicker/colorpicker_hex.png) top; \
+left:212px; \
+top:142px; \
 } \
  \
 .colorpicker_hex input { \
-	right: 6px; \
+right:6px; \
 } \
  \
 .colorpicker_field { \
-	height: 22px; \
-	width: 62px; \
-	background-position: top; \
-	position: absolute; \
+height:22px; \
+width:62px; \
+background-position:top; \
+position:absolute; \
 } \
  \
 .colorpicker_field span { \
-	position: absolute; \
-	width: 12px; \
-	height: 22px; \
-	overflow: hidden; \
-	top: 0; \
-	right: 0; \
-	cursor: n-resize; \
+position:absolute; \
+width:12px; \
+height:22px; \
+overflow:hidden; \
+top:0; \
+right:0; \
+cursor:n-resize; \
 } \
  \
 .colorpicker_rgb_r { \
-	background-image: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_r.png); \
-	top: 52px; \
-	left: 212px; \
+background-image:url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_r.png); \
+top:52px; \
+left:212px; \
 } \
  \
 .colorpicker_rgb_g { \
-	background-image: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_g.png); \
-	top: 82px; \
-	left: 212px; \
+background-image:url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_g.png); \
+top:82px; \
+left:212px; \
 } \
  \
 .colorpicker_rgb_b { \
-	background-image: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_b.png); \
-	top: 112px; \
-	left: 212px; \
+background-image:url(http://outiiil.fr/images/colorpicker/colorpicker_rgb_b.png); \
+top:112px; \
+left:212px; \
 } \
  \
 .colorpicker_hsb_h { \
-	background-image: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_h.png); \
-	top: 52px; \
-	left: 282px; \
+background-image:url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_h.png); \
+top:52px; \
+left:282px; \
 } \
  \
 .colorpicker_hsb_s { \
-	background-image: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_s.png); \
-	top: 82px; \
-	left: 282px; \
+background-image:url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_s.png); \
+top:82px; \
+left:282px; \
 } \
  \
 .colorpicker_hsb_b { \
-	background-image: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_b.png); \
-	top: 112px; \
-	left: 282px; \
+background-image:url(http://outiiil.fr/images/colorpicker/colorpicker_hsb_b.png); \
+top:112px; \
+left:282px; \
 } \
  \
 .colorpicker_submit { \
-	position: absolute; \
-	width: 22px; \
-	height: 22px; \
-	background: \
-		url(http://outiiil.fr/images/colorpicker/colorpicker_submit.png) top; \
-	left: 322px; \
-	top: 142px; \
-	overflow: hidden; \
+position:absolute; \
+width:22px; \
+height:22px; \
+background:url(http://outiiil.fr/images/colorpicker/colorpicker_submit.png) top; \
+left:322px; \
+top:142px; \
+overflow:hidden; \
 } \
  \
 .colorpicker_focus { \
-	background-position: center; \
+background-position:center; \
 } \
  \
 .colorpicker_hex.colorpicker_focus,.colorpicker_submit.colorpicker_focus,.colorpicker_slider { \
-	background-position: bottom; \
+background-position:bottom; \
 } \
 ";
 
@@ -394,10 +403,15 @@ window.addEventListener('load', function () {
     //$("head").append('<link rel="stylesheet" type="text/css" href="http://userstyles.org/styles/80741.css" />');
     GM_addStyle(style);
 
-    if (connecte && !comptePlus) {
+    if (connecte) {
         box = new Box();
-        box.__init();
-        box.show();
+        if (!comptePlus) {
+            box.__init();
+            box.__construct();
+        }
+        if ($("#tag_alliance").text() == "AD" && location.host.split('.')[0] == "s1" || !comptePlus) {
+            box.__constructBoxAD();
+        }
     }
     if (uri == "/Armee.php") {
         window.page = new PageArmee();
@@ -414,15 +428,10 @@ window.addEventListener('load', function () {
         table.comptePlus()
     }
     if (uri == "/classementAlliance.php" && location.search != "") {
-        table = new Table("#tabMembresAlliance");
-        table.__construct(3);
-        if (!comptePlus) {
-            table.comptePlus()
-        }
+        page = new PageDescriptionAlliance();
+        page.__construct();
     }
     if (uri == "/commerce.php") {
-        $("head").append('<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />')
-        $("head").append('<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js" />');
         window.page = new PageCommerce();
         page.__init();
         page.__construct()
@@ -2574,7 +2583,7 @@ function Armee() {
             });
             setTimeout(function () {
                 page.getArmee().sendFlood(w, v)
-            }, 1000)
+            }, 2000)
         } else {
             document.location = "/Armee.php"
         }
@@ -3058,11 +3067,12 @@ function Armee() {
 };
 
 function Box() {
-    var c = parseInt($("#quantite_tdc").text());
+    var d = parseInt($("#quantite_tdc").text());
+    var c = new Array();
+    var f = new Array();
     var b = new Array();
     var e = new Array();
-    var a = new Array();
-    var d = new Array();
+    var a = new Utilitaire();
     this.__init = function () {
         this.initPonte();
         this.initConstruction();
@@ -3070,23 +3080,23 @@ function Box() {
         $.ajax({
             url: "/Ressources.php",
             async: false,
-            success: function (f) {
-                d.prod = new Array();
-                d.prod["materiaux"] = parseInt($(f).find("#RecolteMateriaux").val());
-                d.prod["nourriture"] = parseInt($(f).find("#RecolteNourriture").val());
-                d.prod["rien"] = c - d.prod["materiaux"] - d.prod["nourriture"];
-                d.nourriture = new Array();
-                d.nourriture["tdc"] = parseInt($(f).find("#RecolteNourriture").val()) * 48;
-                d.nourriture["champi"] = parseInt(removeSpace($(f).find("strong:eq(7)").text()));
-                d.nourriture["armee"] = parseInt(removeSpace($(f).find("strong:eq(8)").text()))
+            success: function (g) {
+                e.prod = new Array();
+                e.prod["materiaux"] = parseInt($(g).find("#RecolteMateriaux").val());
+                e.prod["nourriture"] = parseInt($(g).find("#RecolteNourriture").val());
+                e.prod["rien"] = d - e.prod["materiaux"] - e.prod["nourriture"];
+                e.nourriture = new Array();
+                e.nourriture["tdc"] = parseInt($(g).find("#RecolteNourriture").val()) * 48;
+                e.nourriture["champi"] = parseInt(removeSpace($(g).find("strong:eq(7)").text()));
+                e.nourriture["armee"] = parseInt(removeSpace($(g).find("strong:eq(8)").text()))
             }
         })
     };
     this.getPonte = function () {
-        return b
+        return c
     };
-    this.setPonte = function (f) {
-        b = f
+    this.setPonte = function (g) {
+        c = g
     };
     this.initPonte = function () {
         cookie = $.jCookies({
@@ -3094,19 +3104,19 @@ function Box() {
         });
         if (cookie) {
             date = new Date();
-            b.unit = cookie.unit.substr(0, 1).toUpperCase() + cookie.unit.substr(1);
-            b.time = parseInt((cookie.time - date.getTime()) / 1000)
+            c.unit = cookie.unit.substr(0, 1).toUpperCase() + cookie.unit.substr(1);
+            c.time = parseInt((cookie.time - date.getTime()) / 1000)
         }
     };
     this.updatePonte = function () {
-        $("a[href='Reine.php'] .ligne_boite_compte_plus:first").text(b.unit);
-        decrementTime(b.time, "tempsUnite")
+        $("a[href='Reine.php'] .ligne_boite_compte_plus:first").text(c.unit);
+        decrementTime(c.time, "tempsUnite")
     };
     this.getConstruction = function () {
-        return e
+        return f
     };
-    this.setConstruction = function (f) {
-        e = f
+    this.setConstruction = function (g) {
+        f = g
     };
     this.initConstruction = function () {
         cookie = $.jCookies({
@@ -3114,19 +3124,19 @@ function Box() {
         });
         if (cookie) {
             date = new Date();
-            e.evolution = cookie.evolution.substr(0, 1).toUpperCase() + cookie.evolution.substr(1);
-            e.time = parseInt((cookie.time - date.getTime()) / 1000)
+            f.evolution = cookie.evolution.substr(0, 1).toUpperCase() + cookie.evolution.substr(1);
+            f.time = parseInt((cookie.time - date.getTime()) / 1000)
         }
     };
     this.updateConstruction = function () {
-        $("a[href='construction.php'] .ligne_boite_compte_plus:first").text(e.evolution);
-        decrementTime(e.time, "tempsBatiment")
+        $("a[href='construction.php'] .ligne_boite_compte_plus:first").text(f.evolution);
+        decrementTime(f.time, "tempsBatiment")
     };
     this.getRecherche = function () {
-        return a
+        return b
     };
-    this.setRecherche = function (f) {
-        a = f
+    this.setRecherche = function (g) {
+        b = g
     };
     this.initRecherche = function () {
         cookie = $.jCookies({
@@ -3134,25 +3144,30 @@ function Box() {
         });
         if (cookie) {
             date = new Date();
-            a.evolution = cookie.evolution.substr(0, 1).toUpperCase() + cookie.evolution.substr(1);
-            a.time = parseInt((cookie.time - date.getTime()) / 1000)
+            b.evolution = cookie.evolution.substr(0, 1).toUpperCase() + cookie.evolution.substr(1);
+            b.time = parseInt((cookie.time - date.getTime()) / 1000)
         }
     };
     this.updateRecherche = function () {
-        $("a[href='laboratoire.php'] .ligne_boite_compte_plus:first").text(a.evolution);
-        decrementTime(a.time, "tempsRecherche")
+        $("a[href='laboratoire.php'] .ligne_boite_compte_plus:first").text(b.evolution);
+        decrementTime(b.time, "tempsRecherche")
     };
-    this.show = function () {
-        rien = ((d.prod["rien"] / c) * 100).toFixed(2);
-        materiaux = ((d.prod["materiaux"] / c) * 100).toFixed(2);
-        nourriture = ((d.prod["nourriture"] / c) * 100).toFixed(2);
-        total_prod = d.nourriture["tdc"] + d.nourriture["champi"] - d.nourriture["armee"];
-        conso_armee = (d.nourriture["armee"] * 100 / (d.nourriture["tdc"] + d.nourriture["champi"])).toFixed(2);
+    this.__construct = function () {
+        rien = ((e.prod["rien"] / d) * 100).toFixed(2);
+        materiaux = ((e.prod["materiaux"] / d) * 100).toFixed(2);
+        nourriture = ((e.prod["nourriture"] / d) * 100).toFixed(2);
+        total_prod = e.nourriture["tdc"] + e.nourriture["champi"] - e.nourriture["armee"];
+        conso_armee = (e.nourriture["armee"] * 100 / (e.nourriture["tdc"] + e.nourriture["champi"])).toFixed(2);
         if (conso_armee > 100) {
             conso_armee = 100
         }
-        creerBoiteComptePlus("fr_FR", false, (b.unit ? b.unit : "Aucune ponte"), (b.unit ? b.time : ""), (e.evolution ? e.evolution : "Aucune construction"), (e.evolution ? e.time : ""), (a.evolution ? a.evolution : "Aucune recherche"), (a.evolution ? a.time : ""), rien, materiaux, formatNumber(c), "TDC : " + rien + "% rien, " + materiaux + "% materiaux, " + nourriture + "% nourriture", (total_prod >= 0 ? "+" : "") + formatNumber(total_prod), formatNumber(d.nourriture["champi"]) + "(champi) + " + formatNumber(d.nourriture["tdc"]) + "(tdc) - " + formatNumber(d.nourriture["armee"]) + "(armée), soit " + conso_armee + "% pour l’armée", conso_armee, "", "");
+        creerBoiteComptePlus("fr_FR", false, (c.unit ? c.unit : "Aucune ponte"), (c.unit ? c.time : ""), (f.evolution ? f.evolution : "Aucune construction"), (f.evolution ? f.time : ""), (b.evolution ? b.evolution : "Aucune recherche"), (b.evolution ? b.time : ""), rien, materiaux, formatNumber(d), "TDC : " + rien + "% rien, " + materiaux + "% materiaux, " + nourriture + "% nourriture", (total_prod >= 0 ? "+" : "") + formatNumber(total_prod), formatNumber(e.nourriture["champi"]) + "(champi) + " + formatNumber(e.nourriture["tdc"]) + "(tdc) - " + formatNumber(e.nourriture["armee"]) + "(armée), soit " + conso_armee + "% pour l’armée", conso_armee, "", "");
         $("#boiteComptePlus .titre_colonne_cliquable").html("<a href='http://outiiil.fr/'>Outiiil 1.1</a>")
+    };
+    this.__constructBoxAD = function () {
+        boite = "<div id='boiteAD' class='boite_compte_plus'><div class='titre_colonne_cliquable'><a class='titre_compte_plus'>AD</a></div><div class='contenu_boite_compte_plus'><table></table></div></div>";
+        $("#menuBoite").append(boite);
+        a.__initDataPlayer()
     }
 };
 
@@ -3388,7 +3403,7 @@ function Table(b) {
             if ($(this).index() > 0) {
                 terrainCible = parseInt(removeSpace($(this).find("td:eq(" + c + ")").text()));
                 if (terrainCible >= ((terrain * 0.5) + 1) && terrainCible <= ((terrain * 3) - 1) && $(this).find("td:eq(" + (c - 1) + ")").text() != pseudo) {
-                    $(this).find("td:eq(" + c + ")").css("color", "#ff0000")
+                    $(this).find("td:eq(" + c + ")").addClass("blue")
                 }
             }
         });
@@ -3442,160 +3457,181 @@ function Table(b) {
 
 function Utilitaire() {
     var a = "https://ad.nirgal.com/utilitaire/ajax/";
-    var d = new Array();
-    var j = new Array();
-    var b = new Array();
     var e = new Array();
+    var k = new Array();
     var c = new Array();
-    var h = this;
-    var g = function (k) {
-        splt = k.split("-");
+    var f = new Array();
+    var d = new Array();
+    var j = this;
+    var h = function (l) {
+        splt = l.split("-");
         return splt[2] + "-" + splt[1] + "-" + splt[0]
     };
-    var f = function (k) {
+    var g = function (l) {
         d2 = new Date();
-        k = k.getTime() / 86400000;
+        l = l.getTime() / 86400000;
         d2 = d2.getTime() / 86400000;
-        return new Number(d2 - k).toFixed(0)
+        return new Number(d2 - l).toFixed(0)
+    };
+    var b = function (l) {
+        if (l > 10000000000000) {
+            return (l / 1000000000000).toFixed(0) + " T"
+        }
+        if (l > 1000000000000) {
+            return (l / 1000000000000).toFixed(1) + " T"
+        }
+        if (l > 10000000000) {
+            return (l / 1000000000).toFixed(0) + " G"
+        }
+        if (l > 1000000000) {
+            return (l / 1000000000).toFixed(1) + " G"
+        }
+        if (l > 10000000) {
+            return (l / 1000000).toFixed(0) + " M"
+        }
+        if (l > 1000000) {
+            return (l / 1000000).toFixed(1) + " M"
+        }
+        return l
     };
     this.getCommandeMat = function () {
-        return d
+        return e
     };
     this.getCommandeNou = function () {
-        return j
+        return k
     };
-    this.__initCommand = function (k, m, l) {
+    this.__initCommand = function (l, n, m) {
         $.ajax({
             url: a + "liste_commande.php",
             dataType: "json",
             xhrFields: {
                 withCredentials: true
             },
-            error: function (o, n) {
+            error: function (p, o) {
                 alert("Désolé la procédure a echoué, veuillez réessayer plus tard !")
             },
-            success: function (n) {
-                if (n.errorcode == 0) {
-                    d = n.liste_materiaux;
-                    j = n.liste_nourriture;
-                    h.command(k, m, l);
-                    h.commandEvent()
+            success: function (o) {
+                if (o.errorcode == 0) {
+                    e = o.liste_materiaux;
+                    k = o.liste_nourriture;
+                    j.command(l, n, m);
+                    j.commandEvent()
                 } else {
-                    $("#tabConvois").html("<tr><td>" + n.errortext + "</td></tr>")
+                    $("#tabConvois").html("<tr><td>" + o.errortext + "</td></tr>")
                 }
             },
         })
     };
-    this.command = function (k, n, m) {
+    this.command = function (l, o, n) {
         total = 0;
         totalRouge = 0;
         contenu = "";
-        if (j.length > 0) {
-            for (var l = 0; l < j.length; l++) {
-                contenu += "<tr><td>" + j[l]["pseudo"] + "</td>";
+        if (k.length > 0) {
+            for (var m = 0; m < k.length; m++) {
+                contenu += "<tr><td>" + k[m]["pseudo"] + "</td>";
                 contenu += "<td><img width='18' heigth='18' src='http://img3.fourmizzz.fr/images/icone/icone_pomme.gif'/></td>";
-                contenu += "<td class='right'>" + formatNumber(j[l]["reste"]) + "</td>";
-                if (j[l]["etat"] == "P1") {
+                contenu += "<td class='right'>" + formatNumber(k[m]["reste"]) + "</td>";
+                if (k[m]["etat"] == "P1") {
                     contenu += "<td><img src='http://img3.fourmizzz.fr/images/icone/3rondrouge.gif' /></td>"
                 } else {
-                    if (j[l]["etat"] == "P2") {
+                    if (k[m]["etat"] == "P2") {
                         contenu += "<td><img src='http://img3.fourmizzz.fr/images/icone/2rondorange.gif' /></td>"
                     } else {
-                        if (j[l]["etat"] == "P3") {
+                        if (k[m]["etat"] == "P3") {
                             contenu += "<td><img src='http://img3.fourmizzz.fr/images/icone/1rondvert.gif' /></td>"
                         } else {
-                            contenu += "<td><img src='http://outiiil.fr/images/croix.png' title='Ne pas livrer avant le " + j[l]["date_apres"] + "'/></td>"
+                            contenu += "<td><img src='http://outiiil.fr/images/croix.png' title='Ne pas livrer avant le " + k[m]["date_apres"] + "'/></td>"
                         }
                     }
                 }
-                time = Math.ceil(Math.pow(0.9, m) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(j[l]["coord_x"] - k, 2) + Math.pow(j[l]["coord_y"] - n, 2)) / 350))));
+                time = Math.ceil(Math.pow(0.9, n) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(k[m]["coord_x"] - l, 2) + Math.pow(k[m]["coord_y"] - o, 2)) / 350))));
                 contenu += "<td>" + formatTime(time) + "</td>";
-                if (j[l]["etat"] != "WAIT") {
-                    contenu += "<td><span id='command_nou_" + l + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></a></td>"
+                if (k[m]["etat"] != "WAIT") {
+                    contenu += "<td><span id='command_nou_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></a></td>"
                 } else {
                     contenu += "<td></td>"
                 }
-                attente = f(new Date(j[l]["date_prevue"]));
+                attente = g(new Date(k[m]["date_prevue"]));
                 if (attente > 0) {
-                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question' title='Date soumise : " + g(j[l]["date_soumise"]) + "&#10;Date prevue : " + g(j[l]["date_prevue"]) + "&#10;Attente : " + attente + " jours'/></td>"
+                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question' title='Date soumise : " + h(k[m]["date_soumise"]) + "&#10;Date prevue : " + h(k[m]["date_prevue"]) + "&#10;Attente : " + attente + " jours'/></td>"
                 } else {
-                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question' title='Date soumise : " + g(j[l]["date_soumise"]) + "&#10;Date prevue : " + g(j[l]["date_prevue"]) + "'/></td>"
+                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question' title='Date soumise : " + h(k[m]["date_soumise"]) + "&#10;Date prevue : " + h(k[m]["date_prevue"]) + "'/></td>"
                 }
                 contenu += "</tr>"
             }
         }
-        if (d.length > 0) {
-            for (var l = 0; l < d.length; l++) {
-                contenu += "<tr><td>" + d[l]["pseudo"] + "</td>";
+        if (e.length > 0) {
+            for (var m = 0; m < e.length; m++) {
+                contenu += "<tr><td>" + e[m]["pseudo"] + "</td>";
                 contenu += "<td><img src='http://img3.fourmizzz.fr/images/icone/icone_bois.gif'/></td>";
-                contenu += "<td class='right'>" + formatNumber(d[l]["reste"]) + "</td>";
-                if (d[l]["etat"] == "P1") {
-                    totalRouge += parseInt(d[l]["reste"]);
+                contenu += "<td class='right'>" + formatNumber(e[m]["reste"]) + "</td>";
+                if (e[m]["etat"] == "P1") {
+                    totalRouge += parseInt(e[m]["reste"]);
                     contenu += "<td><img src='http://img3.fourmizzz.fr/images/icone/3rondrouge.gif' /></td>"
                 } else {
-                    if (d[l]["etat"] == "P2") {
+                    if (e[m]["etat"] == "P2") {
                         contenu += "<td><img src='http://img3.fourmizzz.fr/images/icone/2rondorange.gif' /></td>"
                     } else {
-                        if (d[l]["etat"] == "P3") {
+                        if (e[m]["etat"] == "P3") {
                             contenu += "<td><img src='http://img3.fourmizzz.fr/images/icone/1rondvert.gif' /></td>"
                         } else {
-                            contenu += "<td><img src='http://outiiil.fr/images/croix.png' title='Ne pas livrer avant le " + d[l]["date_apres"] + "'/></td>"
+                            contenu += "<td><img src='http://outiiil.fr/images/croix.png' title='Ne pas livrer avant le " + e[m]["date_apres"] + "'/></td>"
                         }
                     }
                 }
-                total += parseInt(d[l]["reste"]);
-                time = Math.ceil(Math.pow(0.9, m) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(d[l]["coord_x"] - k, 2) + Math.pow(d[l]["coord_y"] - n, 2)) / 350))));
+                total += parseInt(e[m]["reste"]);
+                time = Math.ceil(Math.pow(0.9, n) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(e[m]["coord_x"] - l, 2) + Math.pow(e[m]["coord_y"] - o, 2)) / 350))));
                 contenu += "<td>" + formatTime(time) + "</td>";
-                if (d[l]["etat"] != "WAIT") {
-                    contenu += "<td><span id='commande_mat_" + l + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></a></td>"
+                if (e[m]["etat"] != "WAIT") {
+                    contenu += "<td><span id='commande_mat_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></a></td>"
                 } else {
                     contenu += "<td></td>"
                 }
-                attente = f(new Date(d[l]["date_prevue"]));
+                attente = g(new Date(e[m]["date_prevue"]));
                 if (attente > 0) {
-                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question'  title='Priorité : " + d[l]["priorite"].toFixed(2) + "&#10;Date soumise : " + g(d[l]["date_soumise"]) + "&#10;Date prevue : " + g(d[l]["date_prevue"]) + "&#10;Attente : " + attente + " jours'/></td>"
+                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question'  title='Priorité : " + e[m]["priorite"].toFixed(2) + "&#10;Date soumise : " + h(e[m]["date_soumise"]) + "&#10;Date prevue : " + h(e[m]["date_prevue"]) + "&#10;Attente : " + attente + " jours'/></td>"
                 } else {
-                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question'  title='Priorité : " + d[l]["priorite"].toFixed(2) + "&#10;Date soumise : " + g(d[l]["date_soumise"]) + "&#10;Date prevue : " + g(d[l]["date_prevue"]) + "'/></td>"
+                    contenu += "<td><img src='http://outiiil.fr/images/question.png' alt='question'  title='Priorité : " + e[m]["priorite"].toFixed(2) + "&#10;Date soumise : " + h(e[m]["date_soumise"]) + "&#10;Date prevue : " + h(e[m]["date_prevue"]) + "'/></td>"
                 }
                 contenu += "</tr>"
             }
         }
         $("#tabConvois").append("<thead class='cursor'><tr class='even'><th>Pseudo</th><th>Type</th><th>Quantité</th><th>État</th><th>Temps de trajet</th><th>Livrer</th><th>Infos</th></tr></thead>");
         $("#tabConvois").append(contenu);
-        if ((j.length + d.length) % 2) {
+        if ((k.length + e.length) % 2) {
             $("#tabConvois").append("<tfoot><tr class='even'><td colspan=8>Total : " + formatNumber(total) + " dont : <span class='red'>" + formatNumber(totalRouge) + " en retard !</span></td></tr></tfoot>")
         } else {
             $("#tabConvois").append("<tfoot><tr><td colspan=8>Total : " + formatNumber(total) + " dont : <span class='red'>" + formatNumber(totalRouge) + " en retard !</span></td></tr></tfoot>")
         }
         $.tablesorter.addParser({
             id: "myNumeric",
-            is: function (o) {
+            is: function (p) {
                 return false
             },
-            format: function (o) {
-                return o.replace(/\s+/g, "").replace(/,/g, ".")
+            format: function (p) {
+                return p.replace(/\s+/g, "").replace(/,/g, ".")
             },
             type: "numeric"
         });
         $.tablesorter.addParser({
             id: "myTime",
-            is: function (o) {
+            is: function (p) {
                 return false
             },
-            format: function (o) {
+            format: function (p) {
                 regexp = new RegExp("((\\d+)J )?s*((\\d+)H )?s*((\\d+)m )?s*((\\d+)s )?s*");
                 duree = 0;
-                if (o.replace(regexp, "$2")) {
-                    duree += parseInt(o.replace(regexp, "$2")) * 24
+                if (p.replace(regexp, "$2")) {
+                    duree += parseInt(p.replace(regexp, "$2")) * 24
                 }
-                if (o.replace(regexp, "$4")) {
-                    duree = (duree + parseInt(o.replace(regexp, "$4"))) * 60
+                if (p.replace(regexp, "$4")) {
+                    duree = (duree + parseInt(p.replace(regexp, "$4"))) * 60
                 }
-                if (o.replace(regexp, "$6")) {
-                    duree = (duree + parseInt(o.replace(regexp, "$6"))) * 60
+                if (p.replace(regexp, "$6")) {
+                    duree = (duree + parseInt(p.replace(regexp, "$6"))) * 60
                 }
-                if (o.replace(regexp, "$8")) {
-                    duree += parseInt(o.replace(regexp, "$8"))
+                if (p.replace(regexp, "$8")) {
+                    duree += parseInt(p.replace(regexp, "$8"))
                 }
                 return duree
             },
@@ -3616,20 +3652,20 @@ function Utilitaire() {
     this.commandEvent = function () {
         $("span[id^=commande_nou_]").click(function () {
             i = $(this).attr("id").slice(13);
-            page.fillForm(j[i]["id"], j[i]["coord_x"], j[i]["coord_y"], j[i]["pseudo"], "N", j[i]["reste"]);
+            page.fillForm(k[i]["id"], k[i]["coord_x"], k[i]["coord_y"], k[i]["pseudo"], "N", k[i]["reste"]);
             $("html, body").animate({
                 scrollTop: $(document).height()
             }, "slow")
         });
         $("span[id^=commande_mat_]").click(function () {
             i = $(this).attr("id").slice(13);
-            page.fillForm(d[i]["id"], d[i]["coord_x"], d[i]["coord_y"], d[i]["pseudo"], "M", d[i]["reste"]);
+            page.fillForm(e[i]["id"], e[i]["coord_x"], e[i]["coord_y"], e[i]["pseudo"], "M", e[i]["reste"]);
             $("html, body").animate({
                 scrollTop: $(document).height()
             }, "slow")
         })
     };
-    this.sendConvoi = function (l, k) {
+    this.sendConvoi = function (m, l) {
         $.ajax({
             url: a + "ajout_livraison.php",
             dataType: "json",
@@ -3637,14 +3673,14 @@ function Utilitaire() {
                 withCredentials: true
             },
             data: {
-                commande_id: l,
-                quantite: k
+                commande_id: m,
+                quantite: l
             },
-            error: function (n, m) {
+            error: function (o, n) {
                 alert("Désolé la procédure a echoué, veuillez réessayer plus tard !")
             },
-            success: function (m) {
-                alert(m.errortext);
+            success: function (n) {
+                alert(n.errortext);
                 securiteKey = String($("form center input:hidden").attr("name"));
                 securiteValue = $("form center input:hidden").attr("value");
                 dataSend = {};
@@ -3665,7 +3701,7 @@ function Utilitaire() {
             }
         })
     };
-    this.sendDemande = function (l, m, k) {
+    this.sendDemande = function (m, n, l) {
         $.ajax({
             url: a + "ajout_commande.php",
             dataType: "json",
@@ -3673,46 +3709,46 @@ function Utilitaire() {
                 withCredentials: true
             },
             data: {
-                evolution: l,
-                date_prevue: m,
-                date_apres: k
+                evolution: m,
+                date_prevue: n,
+                date_apres: l
             },
-            error: function (o, n) {
+            error: function (p, o) {
                 alert("Désolé la procédure a echoué, veuillez réessayer plus tard !")
             },
-            success: function (n) {
-                alert(n.errortext)
+            success: function (o) {
+                alert(o.errortext)
             }
         })
     };
     this.getStatus = function () {
-        return b
+        return c
     };
-    this.setStatus = function (k) {
-        b = k
+    this.setStatus = function (l) {
+        c = l
     };
-    this.__initStatus = function (k) {
+    this.__initStatus = function (l) {
         $.ajax({
             url: a + "info_sdc.php",
             dataType: "json",
             xhrFields: {
                 withCredentials: true
             },
-            error: function (m, l) {
+            error: function (n, m) {
                 alert("Désolé, données indisponibles, veuillez réessayer plus tard !")
             },
-            success: function (l) {
-                if (l.errorcode == 0) {
-                    b = l.info;
-                    h.status(k);
-                    h.statusEvent()
+            success: function (m) {
+                if (m.errorcode == 0) {
+                    c = m.info;
+                    j.status(l);
+                    j.statusEvent()
                 } else {
-                    $(".boite_amelioration:last").append("<tr class='even'><td colspan=8>" + l.errortext + "</td></tr>")
+                    $(".simulateur h2:first").after("<p>" + m.errortext + "</p>")
                 }
             },
         })
     };
-    this.status = function (k) {
+    this.status = function (l) {
         $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showPlace' type='checkbox' name='showPlace'>Afficher Place</input></td><td colspan=2><input id='showLevel' type='checkbox' name='showLevel'>Afficher Niveau</input></td></tr>");
         $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showOption' type='checkbox' name='showOption' checked>Afficher Option</input></td><td colspan=2><input id='showInfo' type='checkbox' name='showInfo' checked>Afficher Info</input></td></tr>");
         $("#tabMembresAlliance th:eq(1)").css("display", "none");
@@ -3726,36 +3762,36 @@ function Utilitaire() {
             $(this).find("td:eq(1)").css("display", "none");
             $(this).find("td:eq(5)").css("display", "none");
             $(this).find("td:eq(6)").css("display", "none");
-            if ($(this).index() > 0) {
+            if ($(this).index() >= 0) {
                 $(this).append("<td align='center'></td>")
             }
             login = $(this).find("td:eq(3)").text();
-            if (login in b) {
-                if (b[login]["colonisateur"]) {
-                    $(this).find("td:eq(8) img").attr("title", "Colonisé par : " + b[login]["colonisateur"]);
-                    if (!(b[login]["colonisateur"] in b)) {
+            if (login in c) {
+                if (c[login]["colonisateur"]) {
+                    $(this).find("td:eq(8) img").attr("title", "Colonisé par : " + c[login]["colonisateur"]);
+                    if (!(c[login]["colonisateur"] in c)) {
                         $(this).find("td:eq(8) img").attr("src", "http://outiiil.fr/images/attention.gif")
                     }
                 }
                 $(this).find("td:eq(0)").removeAttr("align");
                 $(this).find("td:eq(0)").css("white-space", "nowrap");
-                $(this).find("td:eq(0)").append(" <a href='https://ad.nirgal.com/utilitaire/profil.php?user_id=" + b[login]["phpbb_id"] + "' target='_blank'><img title='Profil utilitaire' src='http://outiiil.fr/images/utilitaire.png' alt='chasse' /></a>");
-                $(this).find("td:eq(0)").append(" <a href='/commerce.php?ID=" + b[login]["fourmizzz_id"] + "'><img title='Envoyer un convoi' src='/images/icone/icone_tdc.gif' alt='convoi' /></a>");
+                $(this).find("td:eq(0)").append(" <a href='https://ad.nirgal.com/utilitaire/profil.php?user_id=" + c[login]["phpbb_id"] + "' target='_blank'><img title='Profil utilitaire' src='http://outiiil.fr/images/utilitaire.png' alt='chasse' /></a>");
+                $(this).find("td:eq(0)").append(" <a href='/commerce.php?ID=" + c[login]["fourmizzz_id"] + "'><img title='Envoyer un convoi' src='/images/icone/icone_tdc.gif' alt='convoi' /></a>");
                 terrainCible = parseInt(removeSpace($(this).find("td:eq(4)").text()));
-                if (terrainCible >= ((terrain * 0.5) + 1) && terrainCible <= ((terrain * 3) - 1) && $(this).find("td:eq(3)").text() != pseudo && b[login]["floodme"]) {
+                if (terrainCible >= ((terrain * 0.5) + 1) && terrainCible <= ((terrain * 3) - 1) && $(this).find("td:eq(3)").text() != pseudo && c[login]["floodme"]) {
                     $(this).find("td:eq(4)").addClass("gras");
-                    $(this).find("td:eq(4)").wrapInner("<a title='Attaquer' href='/ennemie.php?Attaquer=" + b[login]["fourmizzz_id"] + "&lieu=1' />")
+                    $(this).find("td:eq(4)").wrapInner("<a title='Attaquer' href='/ennemie.php?Attaquer=" + c[login]["fourmizzz_id"] + "&lieu=1' />")
                 }
-                if (b[login]["status_code"] == 2) {
+                if (c[login]["status_code"] == 2) {
                     $(this).find("td:eq(0)").append(" <img title='En chasse' src='http://img3.fourmizzz.fr/images/icone/icone_chasse.gif' alt='chasse' />")
                 }
-                if (b[login]["status_code"] == 3) {
+                if (c[login]["status_code"] == 3) {
                     $(this).find("td:eq(0)").append(" <img title='En descente' src='http://outiiil.fr/images/descente.png' alt='descente' />")
                 }
-                if (b[login]["status_code"] == 4) {
+                if (c[login]["status_code"] == 4) {
                     $(this).find("td:eq(0)").append(" <img title='Ne pas flooder' src='http://outiiil.fr/images/croix.png' alt='noflood' />")
                 }
-                time = Math.ceil(Math.pow(0.9, k) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(b[login]["coord_x"] - b[$("#pseudo").text()]["coord_x"], 2) + Math.pow(b[login]["coord_y"] - b[$("#pseudo").text()]["coord_y"], 2)) / 350))));
+                time = Math.ceil(Math.pow(0.9, l) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(c[login]["coord_x"] - c[$("#pseudo").text()]["coord_x"], 2) + Math.pow(c[login]["coord_y"] - c[$("#pseudo").text()]["coord_y"], 2)) / 350))));
                 $(this).find("td:eq(10)").append(formatTime(time))
             }
         })
@@ -3823,10 +3859,10 @@ function Utilitaire() {
         })
     };
     this.getDataPlayer = function () {
-        return e
+        return f
     };
-    this.setDataPlayer = function (k) {
-        e = k
+    this.setDataPlayer = function (l) {
+        f = l
     };
     this.__initDataPlayer = function () {
         $.ajax({
@@ -3835,46 +3871,21 @@ function Utilitaire() {
             xhrFields: {
                 withCredentials: true
             },
-            success: function (k) {
-                if (k.errorcode == 0) {
-                    e.activite = k.mul_tantieme;
-                    e.niveau_champi = k.needed_mushroom;
-                    e.champi = k.champi;
-                    e.solde = k.solde_virtuel;
-                    h.showDataPlayer()
+            success: function (l) {
+                if (l.errorcode == 0) {
+                    f.activite = l.mul_tantieme;
+                    f.solde = l.solde_virtuel;
+                    f.tdc_virtuel = l.tdc_virtuel;
+                    j.showDataPlayer()
                 }
             },
         })
     };
     this.showDataPlayer = function () {
-        color = e.niveau_champi < e.champi ? "green" : "red";
-        $("#tableau_demande").append("<tr class='centre'><td colspan=3><strong>Info : À votre niveau une Champignonnière niveau <span class='" + color + "'>" + e.niveau_champi + "</span> est exigée.</strong></td></tr>");
-        $("#tableau_demande").append("<tr class='centre'><td colspan=3><strong>Info : Actuellement vous avez droit à " + formatNumber(e.solde) + " <img src='http://img3.fourmizzz.fr/images/icone/icone_bois.gif'/>.</strong></td></tr>");
-        $("#tableau_demande").append("<tr><td colspan=3><strong><div title='Activité : " + e.activite + "%' id='progressbar'></div></strong></td></tr>");
-        $("#progressbar").progressbar({
-            value: e.activite,
-        });
-        if (e.activite > 75) {
-            $("#progressbar > div").css({
-                background: "#1F9412"
-            })
-        } else {
-            if (e.activite > 50) {
-                $("#progressbar > div").css({
-                    background: "yellow"
-                })
-            } else {
-                if (e.activite > 25) {
-                    $("#progressbar > div").css({
-                        background: "orange"
-                    })
-                } else {
-                    $("#progressbar > div").css({
-                        background: "red"
-                    })
-                }
-            }
-        }
+        color = f.solde >= 0 ? "green" : "red";
+        line = "<tr title='Vous récoltez : " + b(f.tdc_virtuel * 48) + " / jour, " + b(f.tdc_virtuel * 48 * 31) + " / mois'><td><img alt='TDC' src='http://img3.fourmizzz.fr/images/icone/icone_tdc.gif' width='18' height='18'/></td><td>Terrain</td><td>" + formatNumber(f.tdc_virtuel) + " cm²</td></tr>";
+        line += "<tr title='limite à [-100%, 200%] de la capacité de votre entrepôt.'><td><img alt='materiaux' src='http://s1.fourmizzz.fr/images/smiley/wood.gif' width='18' height='18'/></td><td>Solde</td><td class='" + color + "'>" + formatNumber(f.solde) + "</td></tr>";
+        $("#boiteAD table").append(line)
     }
 };
 
@@ -3897,55 +3908,24 @@ function PageAlliance() {
         totalTerrain = 0;
         totalConstruction = 0;
         totalTechno = 0;
-        totalActif = 0;
-        totalAbsent = 0;
-        totalDisparu = 0;
-        totalVacance = 0;
-        totalBani = 0;
-        totalColonise = 0;
         pseudo = $("#pseudo").text();
         terrain = $("#quantite_tdc").text();
         $("#tabMembresAlliance tbody tr:gt(0)").each(function () {
             totalTerrain += parseInt(removeSpace($(this).find("td:eq(4)").text()));
             totalConstruction += parseInt($(this).find("td:eq(6)").text());
             totalTechno += parseInt($(this).find("td:eq(5)").text());
-            if ($(this).find("td:eq(7)").find("img[alt='Actif']").length) {
-                totalActif += 1
-            }
-            if ($(this).find("td:eq(7)").find("img[alt='Inactif depuis 3 jours']").length) {
-                $(this).addClass("orange");
-                totalAbsent += 1
-            }
-            if ($(this).find("td:eq(7)").find("img[alt='Inactif depuis 10 jours']").length) {
-                $(this).addClass("red");
-                totalDisparu += 1
-            }
-            if ($(this).find("td:eq(7)").find("img[alt='Vacances']").length) {
-                totalVacance += 1
-            }
-            if ($(this).find("td:eq(7)").find("img[alt='Bannie']").length) {
-                totalBani += 1
-            }
-            if ($(this).find("td:eq(8)").find("img[alt='Colonisé']").length) {
-                totalColonise += 1
-            }
             terrainCible = parseInt(removeSpace($(this).find("td:eq(4)").text()));
             if (terrainCible >= ((terrain * 0.5) + 1) && terrainCible <= ((terrain * 3) - 1) && $(this).find("td:eq(3)").text() != pseudo) {
                 $(this).find("td:eq(4)").addClass("bleu")
             }
         });
-        $(".simulateur table[class='ligne_paire'] tr:eq(0) td:eq(1)").append("  (" + totalActif + ")");
-        $(".simulateur table[class='ligne_paire'] tr:eq(0) td:eq(3)").append("  (" + totalVacance + ")");
-        $(".simulateur table[class='ligne_paire'] tr:eq(1) td:eq(1)").append("  (" + totalAbsent + ")");
-        $(".simulateur table[class='ligne_paire'] tr:eq(1) td:eq(3)").append("  (" + totalBani + ")");
-        $(".simulateur table[class='ligne_paire'] tr:eq(2) td:eq(1)").append("  (" + totalDisparu + ")");
-        $(".simulateur table[class='ligne_paire'] tr:eq(2) td:eq(3)").append("  (" + totalColonise + ")");
-        if ($("#tabMembresAlliance tr").length % 2 == 0) {
-            ligne = "<tfoot class='centre'><tr class='even'><td></td><td></td><td></td><td></td><td id='totalTerrain' class='total'>" + formatNumber(totalTerrain) + "</td><td class='total'>" + formatNumber(totalConstruction) + "</td><td class='total'>" + formatNumber(totalTechno) + "</td><td></td><td></td><td></td><td></td></tr></tfoot>"
-        } else {
-            ligne = "<tfoot class='centre'><tr><td></td><td></td><td></td><td></td><td id='totalTerrain' class='total'>" + formatNumber(totalTerrain) + "</td><td class='total'>" + formatNumber(totalConstruction) + "</td><td class='total'>" + formatNumber(totalTechno) + "</td><td></td><td></td><td></td><td></td></tr></tfoot>"
-        }
-        $("#tabMembresAlliance").append(ligne)
+        $(".simulateur table[class='ligne_paire'] tr:eq(0) td:eq(1)").append("  (" + $("img[alt='Actif']").length + ")");
+        $(".simulateur table[class='ligne_paire'] tr:eq(0) td:eq(3)").append("  (" + $("img[alt='Vacances']").length + ")");
+        $(".simulateur table[class='ligne_paire'] tr:eq(1) td:eq(1)").append("  (" + $("img[alt='Inactif depuis 3 jours']").length + ")");
+        $(".simulateur table[class='ligne_paire'] tr:eq(1) td:eq(3)").append("  (" + $("img[alt='Bannie']").length + ")");
+        $(".simulateur table[class='ligne_paire'] tr:eq(2) td:eq(1)").append("  (" + $("img[alt='Inactif depuis 10 jours']").length + ")");
+        $(".simulateur table[class='ligne_paire'] tr:eq(2) td:eq(3)").append("  (" + $("img[alt='Colonisé']").length + ")");
+        $(".simulateur h2:first").after("<br/><p class='retour'>Terrain : <span id='totalTerrain'>" + formatNumber(totalTerrain) + "</span> cm², Fourmilière : " + formatNumber(totalConstruction) + ", Technologie : " + formatNumber(totalTechno) + ".</p>")
     };
     this.comptePlus = function () {
         head = $("#tabMembresAlliance tr:first").html();
@@ -3971,34 +3951,30 @@ function PageAlliance() {
         })
     };
     this.optionAD = function () {
-        nombreRecolteur = 0;
+        nombreRecolteur = $("#tabMembresAlliance").text().match(/Récolteur/g).length;
         totalRecolteur = 0;
-        nombrePasseur = 0;
+        nombrePasseur = $("#tabMembresAlliance").text().match(/Passeur/g).length;
         totalPasseur = 0;
-        nombreChasseur = 0;
+        nombreChasseur = $("#tabMembresAlliance").text().match(/CHASSEUR/g).length;
         totalChasseur = 0;
-        nombreADsien = 0;
+        nombreADsien = $("#tabMembresAlliance").text().match(/ADsien/g).length;
         totalADsien = 0;
         $("#tabMembresAlliance tr").each(function () {
             if ($(this).find("td:eq(2)").text().indexOf("Récolteur") != -1) {
-                nombreRecolteur += 1;
                 totalRecolteur += parseInt(removeSpace($(this).find("td:eq(4)").text()))
             }
             if ($(this).find("td:eq(2)").text().indexOf("Passeur") != -1) {
-                nombrePasseur += 1;
                 totalPasseur += parseInt(removeSpace($(this).find("td:eq(4)").text()))
             }
             if ($(this).find("td:eq(2)").text().indexOf("CHASSEUR") != -1) {
-                nombreChasseur += 1;
                 totalChasseur += parseInt(removeSpace($(this).find("td:eq(4)").text()))
             }
             if ($(this).find("td:eq(2)").text().indexOf("ADsien") != -1) {
-                nombreADsien += 1;
                 totalADsien += parseInt(removeSpace($(this).find("td:eq(4)").text()))
             }
         });
-        contenu = "<br/><table class='boite_amelioration my_tab centre' cellspacing='5'><tr><td colspan='8'><span class='titre'>Informations</span></td></tr><tr class='even'><td class='gras' colspan=2>Récolteur</td><td class='gras' colspan=2>Passeur</td><td class='gras' colspan=2>Chasseur</td><td class='gras' colspan=2>ADsien</td></tr><tr><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td></tr><tr class='even'><td>" + nombreRecolteur + "</td><td>" + formatNumber(totalRecolteur) + "</td><td>" + nombrePasseur + "</td><td>" + formatNumber(totalPasseur) + "</td><td>" + nombreChasseur + "</td><td>" + formatNumber(totalChasseur) + "</td><td>" + nombreADsien + "</td><td>" + formatNumber(totalADsien) + "</td></tr><tr><td>" + (nombreRecolteur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalRecolteur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombrePasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalPasseur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombreChasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalChasseur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombreADsien * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalADsien * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td></tr></table>";
-        $(".simulateur:last").after(contenu);
+        contenu = "<br/><h2 style='text-align:left'>Informations</h2><br/><table class='tab_triable centre' style='width:100%' cellspacing='5'><tr class='even'><td class='gras' colspan=2>Récolteur</td><td class='gras' colspan=2>Passeur</td><td class='gras' colspan=2>Chasseur</td><td class='gras' colspan=2>ADsien</td></tr><tr><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td></tr><tr class='even'><td>" + nombreRecolteur + "</td><td>" + formatNumber(totalRecolteur) + "</td><td>" + nombrePasseur + "</td><td>" + formatNumber(totalPasseur) + "</td><td>" + nombreChasseur + "</td><td>" + formatNumber(totalChasseur) + "</td><td>" + nombreADsien + "</td><td>" + formatNumber(totalADsien) + "</td></tr><tr><td>" + (nombreRecolteur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalRecolteur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombrePasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalPasseur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombreChasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalChasseur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombreADsien * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalADsien * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td></tr></table>";
+        $("#tabMembresAlliance").after(contenu);
         a.__initAjax();
         b.__initStatus(a.getLevel()[6])
     }
@@ -4531,7 +4507,7 @@ function PageCommerce() {
         d.__initAjax($("#pseudo").text());
         linkBottom();
         linkTop();
-        $("input[name='convoi']").parent().parent().before("<tr class='centre'><td colspan=6><strong>Info : Envoie automatique vers l'utilitaire, uniquement si vous avez cliqué sur livrer auparavant !</strong></td></tr>");
+        $("input[name='convoi']").parent().parent().before("<tr class='centre'><td colspan=6><strong>Info : Envoi automatique vers l'utilitaire, uniquement si vous avez cliqué sur livrer auparavant !</strong></td></tr>");
         $(".boite_membre:first").append("<input type='hidden' id='idCommand' name='command'/>");
         this.formDemand();
         this.formDemandEvent();
@@ -4550,9 +4526,8 @@ function PageCommerce() {
             }
         }
         selectEvo += "</select>";
-        myForm = "<div class='boite_membre'><span class='titre'>Demander des ressources</span><table id='tableau_demande' class='tab2'><tr><td>Évolution*</td><td>:</td><td class='left'>" + selectEvo + "</td></tr><tr><td>Pour le*</td><td>:</td><td class='left'><input id='dateDemande' class='my_input' name='date' type='text' /> (format : aaaa-mm-jj)</td></tr><tr><td>À partir du</td><td>:</td><td class='left'><input id='dateDebut' class='my_input' name='dateD' type='text' /> (format : aaaa-mm-jj)</td></tr><tr class='centre'><td colspan=3><input type='button' id='envoyer' value='Envoyer'/></td></tr></table></div>";
-        $(".boite_membre:last").after(myForm);
-        b.__initDataPlayer()
+        myForm = "<div class='boite_membre'><span class='titre'>Demander des ressources</span><table id='tableau_demande' class='tab2'><tr><td>Évolution*</td><td>:</td><td class='left'>" + selectEvo + "</td></tr><tr><td>Pour le*</td><td>:</td><td class='left'><input id='dateDemande' class='my_input' name='date' type='text' /> (format : aaaa-mm-jj)</td></tr><tr><td>&Agrave; Partir du</td><td>:</td><td class='left'><input id='dateDebut' class='my_input' name='dateD' type='text' /> (format : aaaa-mm-jj)</td></tr><tr class='centre'><td colspan=3><input type='button' id='envoyer' value='Envoyer'/></td></tr></table></div>";
+        $(".boite_membre:last").after(myForm)
     };
     this.formDemandEvent = function () {
         $("#dateDemande").datepicker({
@@ -4577,40 +4552,41 @@ function PageCommerce() {
         })
     };
     this.showCommand = function () {
-        contenu = "<div class='boite_membre'><span class='titre'>Commandes en cours</span><table id='tabConvois' class='tab1 centre' cellspacing=0></table></div>";
+        contenu = "<div class='boite_membre'><span class='titre'>Commandes en cours</span><table id='tabConvois' cellspacing=0></table></div>";
         $(".boite_membre:first").before(contenu);
         b.__initCommand(d.getX(), d.getY(), c.getLevel()[6])
     }
 };
 
 function PageConstruction() {
-    var a = "/construction.php";
-    var b = new Array();
+    var b = "/construction.php";
+    var c = new Array();
+    var a = new PageLaboratoire();
     this.getLevel = function () {
-        return b
+        return c
     };
-    this.setLevel = function (c) {
-        b = c
+    this.setLevel = function (d) {
+        c = d
     };
     this.__init = function () {
-        $(".niveau_amelioration").each(function (c) {
-            b[c] = parseInt($(this).text().substring(6))
+        $(".niveau_amelioration").each(function (d) {
+            c[d] = parseInt($(this).text().substring(6))
         })
     };
     this.__initAjax = function () {
         $.ajax({
-            url: a,
+            url: b,
             async: false,
-            success: function (c) {
-                $(c).find(".niveau_amelioration").each(function (d) {
-                    b[d] = parseInt($(this).text().substring(6))
+            success: function (d) {
+                $(d).find(".niveau_amelioration").each(function (e) {
+                    c[e] = parseInt($(this).text().substring(6))
                 })
             }
         })
     };
     this.__construct = function () {
         ouvriereDispo = parseInt($("#nb_ouvrieres").text()) - parseInt($("#quantite_tdc").text());
-        sacrifice = (21 + b[11]) * (40 * Math.pow(2, (b[11] + 3)));
+        sacrifice = (21 + c[11]) * (40 * Math.pow(2, (c[11] + 3)));
         if (ouvriereDispo > sacrifice) {
             $(".desciption_amelioration:eq(11) table").append("<tr><td>Utile si:</td><td class='green'><img width='18' height='18' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif' alt='ouvrieres'/> > " + formatNumber(sacrifice) + "</td></tr>")
         } else {
@@ -4655,8 +4631,19 @@ function PageConstruction() {
         }
     };
     this.optionAD = function () {
-        $(".cout_amelioration table").each(function (c) {
-            $(this).append("<tr><td></td><td><input type='button' name='commander" + c + "' value='Commander'/></td></tr>")
+        a.__initAjax();
+        sum = 0;
+        $.each(a.getLevel(), function () {
+            sum += parseFloat(this) || 0
+        });
+        champiDemande = this.computeChampi(sum);
+        if (c[0] < champiDemande) {
+            $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='red'>" + champiDemande + "</span> <img src='http://outiiil.fr/images/question.png' alt='question' title='Niveau de champignonnière insuffisant, votre terrain de chasse virtuel est réduit de " + (champiDemande - c[0]) + "%.' />.")
+        } else {
+            $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='green'>" + champiDemande + "</span> .")
+        }
+        $(".cout_amelioration table").each(function (d) {
+            $(this).append("<tr><td></td><td><input type='button' name='commander" + d + "' value='Commander'/></td></tr>")
         })
     };
     this.optionEventAD = function () {
@@ -4664,6 +4651,41 @@ function PageConstruction() {
             evol = ["champi", "ent_nourriture", "ent_materiaux", "couveuse", "solarium", "laboratoire", "salle_analyse", "salle_combat", "caserne", "dome", "loge", "etable_pucerons", "etable_cochenille"];
             document.location = "/commerce.php?evolution=" + evol[$(this).attr("name").slice(9)]
         })
+    };
+    this.computeChampi = function (d) {
+        if (d <= 100) {
+            return Math.floor(d * 25 / 100)
+        } else {
+            if (d <= 190) {
+                return Math.floor(25 + (d - 100) / 10)
+            } else {
+                if (d <= 200) {
+                    return 34
+                } else {
+                    return Math.floor(34 + (d - 200) / 10)
+                }
+            }
+        }
+    }
+};
+
+function PageDescriptionAlliance() {
+    var a = new Table("#tabMembresAlliance");
+    this.__construct = function () {
+        a.__construct(3);
+        if (!(comptePlus)) {
+            a.comptePlus()
+        }
+        $("#centre center:first").remove();
+        totalTerrain = 0;
+        totalConstruction = 0;
+        totalTechno = 0;
+        $("#tabMembresAlliance tbody tr:gt(0)").each(function () {
+            totalTerrain += parseInt(removeSpace($(this).find("td:eq(3)").text()));
+            totalConstruction += parseInt($(this).find("td:eq(5)").text());
+            totalTechno += parseInt($(this).find("td:eq(4)").text())
+        });
+        $("#tabMembresAlliance").after("<br/><p class='retour'>Terrain : <span id='totalTerrain'>" + formatNumber(totalTerrain) + "</span> cm², Fourmilière : " + formatNumber(totalConstruction) + ", Technologie : " + formatNumber(totalTechno) + ".</p>")
     }
 };
 
@@ -4680,7 +4702,7 @@ function PageEnnemie() {
     this.optionAD = function () {
         a.__initAjax();
         c.__initAjax($("#pseudo").text());
-        contenu = "<table id='tabAttaquer' class='simulateur centre tab1' cellspacing=0><tr><td colspan=10 style='padding-bottom:10px'><h2>Joueurs Backlistès</h2></td></tr><table><br/>";
+        contenu = "<table id='tabAttaquer' class='simulateur' cellspacing=0><tr><td colspan=10 style='padding-bottom:10px'><h2>Joueurs Backlistès</h2></td></tr><table><br/>";
         $(".simulateur:first").before(contenu)
     }
 };
