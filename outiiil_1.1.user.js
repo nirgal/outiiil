@@ -7,6 +7,7 @@
 // @version        1.1
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @require        http://code.jquery.com/ui/1.10.1/jquery-ui.js
+// @require        http://img.fourmizzz.fr/script/BBCodeChat.js
 // ==/UserScript==
 
 style = " \
