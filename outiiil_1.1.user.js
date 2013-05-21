@@ -1746,7 +1746,7 @@ function Armee() {
         Tank: [0, 35, 55, 1, 100, 1860],
         "Tank d'élite": [0, 50, 80, 1, 150, 1860],
         Tueuse: [0, 50, 50, 50, 80, 2740],
-        "Tueuse d'élite": [0, 55, 55, 55, 90, 2740],
+        "Tueuse d'élite": [0, 55, 55, 55, 90, 2740]
     };
     var e = [1, 2, 3, 4, 5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10];
     var j = [0, 0, 0, 0.016, 0.093, 0.345, 0.577777778, 0.753, 0.837, 0.874, 0.937, 0.96, 0.989];
@@ -1967,201 +1967,67 @@ function Armee() {
         }
         return s.slice(0, -2) + "."
     };
-    this.lancerFlood = function () {
-        nbrFlood = parseInt($("#nbr_flood").val());
-        qteFlood = parseInt(removeSpace($("#qte_flood").val()));
-        r = new Array();
-        nbAttDispo = d + 1 - p;
-        iTabAvailableUnits = new Array();
-        iTabAvailableUnits[0] = t["Jeune Soldate Naine"][0];
-        iTabAvailableUnits[1] = t["Soldate Naine"][0];
-        iTabAvailableUnits[2] = t["Naine d'Elite"][0];
-        iTabAvailableUnits[3] = t["Jeune Soldate"][0];
-        iTabAvailableUnits[4] = t.Soldate[0];
-        iTabAvailableUnits[5] = t.Concierge[0];
-        iTabAvailableUnits[6] = t["Concierge d'élite"][0];
-        iTabAvailableUnits[7] = t.Artilleuse[0];
-        iTabAvailableUnits[8] = t["Artilleuse d'élite"][0];
-        iTabAvailableUnits[9] = t["Soldate d'élite"][0];
-        iTabAvailableUnits[10] = t.Tank[0];
-        iTabAvailableUnits[11] = t["Tank d'élite"][0];
-        iTabAvailableUnits[12] = t.Tueuse[0];
-        iTabAvailableUnits[13] = t["Tueuse d'élite"][0];
-        for (var v = 0; v < nbrFlood && v < nbAttDispo; v++) {
-            temp = qteFlood;
-            r[v] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            if (iTabAvailableUnits[0] != 0) {
-                r[v][0] = iTabAvailableUnits[0] >= temp ? temp : iTabAvailableUnits[0];
-                temp -= r[v][0];
-                iTabAvailableUnits[0] -= r[v][0];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[1] != 0) {
-                r[v][1] = iTabAvailableUnits[1] >= temp ? temp : iTabAvailableUnits[1];
-                temp -= r[v][1];
-                iTabAvailableUnits[1] -= r[v][1];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[2] != 0) {
-                r[v][2] = iTabAvailableUnits[2] >= temp ? temp : iTabAvailableUnits[2];
-                temp -= r[v][2];
-                iTabAvailableUnits[2] -= r[v][2];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[3] != 0) {
-                r[v][3] = iTabAvailableUnits[3] >= temp ? temp : iTabAvailableUnits[3];
-                temp -= r[v][3];
-                iTabAvailableUnits[3] -= r[v][3];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[4] != 0) {
-                r[v][4] = iTabAvailableUnits[4] >= temp ? temp : iTabAvailableUnits[4];
-                temp -= r[v][4];
-                iTabAvailableUnits[4] -= r[v][4];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[5] != 0) {
-                r[v][5] = iTabAvailableUnits[5] >= temp ? temp : iTabAvailableUnits[5];
-                temp -= r[v][5];
-                iTabAvailableUnits[5] -= r[v][5];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[6] != 0) {
-                r[v][6] = iTabAvailableUnits[6] >= temp ? temp : iTabAvailableUnits[6];
-                temp -= r[v][6];
-                iTabAvailableUnits[6] -= r[v][6];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[7] != 0) {
-                r[v][7] = iTabAvailableUnits[7] >= temp ? temp : iTabAvailableUnits[7];
-                temp -= r[v][7];
-                iTabAvailableUnits[7] -= r[v][7];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[8] != 0) {
-                r[v][8] = iTabAvailableUnits[8] >= temp ? temp : iTabAvailableUnits[8];
-                temp -= r[v][8];
-                iTabAvailableUnits[8] -= r[v][8];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[9] != 0) {
-                r[v][9] = iTabAvailableUnits[9] >= temp ? temp : iTabAvailableUnits[9];
-                temp -= r[v][9];
-                iTabAvailableUnits[9] -= r[v][9];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[10] != 0) {
-                r[v][10] = iTabAvailableUnits[10] >= temp ? temp : iTabAvailableUnits[10];
-                temp -= r[v][10];
-                iTabAvailableUnits[10] -= r[v][10];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[11] != 0) {
-                r[v][11] = iTabAvailableUnits[11] >= temp ? temp : iTabAvailableUnits[11];
-                temp -= r[v][11];
-                iTabAvailableUnits[11] -= r[v][11];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[12] != 0) {
-                r[v][12] = iTabAvailableUnits[12] >= temp ? temp : iTabAvailableUnits[12];
-                temp -= r[v][12];
-                iTabAvailableUnits[12] -= r[v][12];
-                if (temp == 0) {
-                    continue
-                }
-            }
-            if (iTabAvailableUnits[13] != 0) {
-                r[v][13] = iTabAvailableUnits[13] >= temp ? temp : iTabAvailableUnits[13];
-                temp -= r[v][13];
-                iTabAvailableUnits[13] -= r[v][13]
-            }
+    this.computeFlood = function (v, w) {
+        l = new Array();
+        i = 0;
+        while (v < Math.floor(w * 1.4)) {
+            l[i++] = Math.floor(w * 0.2);
+            v += l[i - 1];
+            w -= l[i - 1]
         }
-        this.sendFlood(1, r.length)
+        limite = Math.floor((w * 2 - v) / 3) - 1;
+        if (limite > 0) {
+            l[i++] = limite;
+            v += l[i - 1];
+            w -= l[i - 1]
+        }
+        l[i++] = Math.floor(w * 0.2);
+        v += l[i - 1];
+        w -= l[i - 1]
     };
     this.simulerFlood = function () {
         tdcAtt = parseInt(removeSpace($("#tdc_depart").val()));
         tdcCible = parseInt(removeSpace($("#tdc_cible").val()));
-        total = 0;
-        nbrUnitUse = 0;
         if (tdcCible >= (tdcAtt * 0.5) && tdcCible <= (tdcAtt * 3)) {
-            uniteRestante = this.affectUnitFlood(tdcAtt, tdcCible);
-            if ($("#oui").is(":checked")) {
-                this.affectTotalUnitFlood(uniteRestante)
-            }
-            for (var w = 0; w < r.length; w++) {
-                nb = 0;
-                prise = Math.floor(tdcCible * 0.2);
-                for (var v = 0; v < r[w].length; v++) {
-                    nb += r[w][v];
-                    nbrUnitUse += r[w][v]
-                }
-                if (nb > prise) {
-                    tdcAtt += prise;
-                    tdcCible -= prise;
-                    total += prise
-                } else {
-                    total += nb;
-                    tdcAtt += nb;
-                    tdcCible -= nb
+            if ($("input[name=opti]:checked").val() == "oui") {
+                this.computeFlood(tdcAtt, tdcCible)
+            } else {
+                l = new Array();
+                for (var v = 0; v < parseInt($("#nbr_flood").val()); v++) {
+                    l[v] = parseInt(removeSpace($("#qte_flood").val()))
                 }
             }
-            if ($("#simulation").length) {
-                $("#simulation").remove()
-            }
-            boite = "<fieldset id='simulation'>";
-            boite += "<legend><span class='titre'>Simulateur</span></legend>";
-            boite += "<center>";
-            boite += "<table class='tab2' cellspacing=0>";
-            boite += "<tr class='even'><td>TDC après attaque</td><td>:</td><td>" + formatNumber(tdcAtt) + " cm²</td></tr>";
-            boite += "<tr><td>TDC cible après attaque</td><td>:</td><td>" + formatNumber(tdcCible) + " cm²</td></tr>";
-            boite += "<tr class='even'><td>Quantité prise</td><td>:</td><td>" + formatNumber(total) + " cm²</td></tr>";
-            boite += "<tr><td>Nombre de flood</td><td>:</td><td>" + r.length + "</td></tr>";
-            boite += "<tr class='even'><td>Nombre d'unités necessaires</td><td>:</td><td>" + formatNumber(nbrUnitUse) + "</td></tr>";
-            boite += "</table>";
-            boite += "</center></fieldset>";
-            $("#formulaireChoixArmee").append(boite)
+            this.afficherFlood()
         } else {
             alert("Données incorrectes !")
         }
     };
-    this.optimiserFlood = function () {
+    this.lancerFlood = function () {
         tdcAtt = parseInt(removeSpace($("#tdc_depart").val()));
         tdcCible = parseInt(removeSpace($("#tdc_cible").val()));
         if (tdcCible >= (tdcAtt * 0.5) && tdcCible <= (tdcAtt * 3)) {
-            uniteRestante = this.affectUnitFlood(tdcAtt, tdcCible);
-            if ($("#oui").is(":checked")) {
+            if ($("input[name=opti]:checked").val() == "oui") {
+                this.computeFlood(tdcAtt, tdcCible)
+            } else {
+                l = new Array();
+                for (var v = 0; v < parseInt($("#nbr_flood").val()); v++) {
+                    l[v] = parseInt(removeSpace($("#qte_flood").val()))
+                }
+            }
+            this.afficherFlood();
+            uniteRestante = this.affectUnitFlood();
+            if ($("input[name=opti]:checked").val() == "oui" && $("#oui").is(":checked")) {
                 this.affectTotalUnitFlood(uniteRestante)
             }
-            this.sendFlood(1, r.length)
+            this.sendFlood(1);
+            $("#simulation table tr:gt(1)").each(function () {
+                $(this).addClass("red")
+            })
         } else {
             alert("Données incorrectes !")
         }
     };
-    this.sendFlood = function (w, v) {
+    this.sendFlood = function (v) {
         if (r.length > 0) {
             dataSend = {};
             securiteKey = String($("#tabChoixArmee input:hidden").attr("name"));
@@ -2191,24 +2057,65 @@ function Armee() {
                 cache: false,
                 data: dataSend,
                 dataType: "text",
-                error: function (z, x, y) {
-                    alert(x)
+                error: function (y, w, x) {
+                    alert(w)
                 },
-                success: function () {
-                    alert("Flood " + (w++) + "/" + v + " envoyé !")
+                success: function (w) {
+                    res = $("<div>").append(w);
+                    res = res.find("#centre").text().replace(res.find("#centre script").text(), "");
+                    if (res.indexOf("Vos troupes sont en marche") == -1) {
+                        $("#simulation table tr:eq(" + (v + 1) + ")").html("<td class='red'>" + v + "</td><td colspan='3' class='red'>" + res + "</td>")
+                    } else {
+                        $("#simulation table tr:eq(" + (v + 1) + ")").html("<td class='green'>" + v+++"</td><td colspan='3' class='green'>" + res + "</td>")
+                    } if (r.length == 0) {
+                        document.location = "/Armee.php"
+                    } else {
+                        setTimeout(function () {
+                            page.getArmee().sendFlood(v)
+                        }, 2000)
+                    }
                 }
-            });
-            setTimeout(function () {
-                page.getArmee().sendFlood(w, v)
-            }, 2000)
-        } else {
-            document.location = "/Armee.php"
+            })
         }
     };
-    this.affectUnitFlood = function (v, x) {
-        this.computeFlood(v, x);
-        r = new Array();
+    this.afficherFlood = function () {
+        tdcAtt = parseInt(removeSpace($("#tdc_depart").val()));
+        tdcCible = parseInt(removeSpace($("#tdc_cible").val()));
         nbAttDispo = d + 1 - p;
+        if ($("#simulation").length) {
+            $("#simulation").remove()
+        }
+        boite = "<fieldset id='simulation'><legend><span class='titre'>Simulateur</span></legend><center><table class='tab2 centre' cellspacing=0><tr class='gras even'><td>Attaque</td><td>Troupe</td><td>Vous</td><td>Cible</td><td></td></tr><tr><td colspan='2'>Données initiales</td><td>" + formatNumber(tdcAtt) + "</td><td>" + formatNumber(tdcCible) + "</td><td></td></tr>";
+        for (var v = 0; v < l.length; v++) {
+            if (v % 2) {
+                boite += "<tr>"
+            } else {
+                boite += "<tr class='even'>"
+            }
+            boite += "<td>" + (v + 1) + "</td>";
+            pourcentage = Math.ceil(l[v] * 100 / tdcCible);
+            prise = l[v];
+            if (pourcentage > 20) {
+                pourcentage = 20;
+                prise = Math.floor(tdcCible * 0.2)
+            }
+            boite += "<td>" + formatNumber(l[v]) + " (" + pourcentage + " %)</td>";
+            if (v + 1 > nbAttDispo) {
+                boite += "<td colspan='2'>VA insuffisante</td></tr>"
+            } else {
+                if (tdcCible >= (tdcAtt * 0.5) && tdcCible <= (tdcAtt * 3)) {
+                    boite += "<td>" + formatNumber(tdcAtt += prise) + "</td>";
+                    boite += "<td>" + formatNumber(tdcCible -= prise) + "</td></tr>"
+                } else {
+                    boite += "<td colspan='2'>Cible trop faible</td></tr>"
+                }
+            }
+        }
+        boite += "</table></center></fieldset>";
+        $("#formulaireChoixArmee").append(boite)
+    };
+    this.affectUnitFlood = function () {
+        r = new Array();
         iTabAvailableUnits = new Array();
         iTabAvailableUnits[0] = t["Jeune Soldate Naine"][0];
         iTabAvailableUnits[1] = t["Soldate Naine"][0];
@@ -2224,116 +2131,116 @@ function Armee() {
         iTabAvailableUnits[11] = t["Tank d'élite"][0];
         iTabAvailableUnits[12] = t.Tueuse[0];
         iTabAvailableUnits[13] = t["Tueuse d'élite"][0];
-        for (var w = 0; w < l.length && w < nbAttDispo; w++) {
-            r[w] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        for (var v = 0; v < l.length; v++) {
+            r[v] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             if (iTabAvailableUnits[0] != 0) {
-                r[w][0] = iTabAvailableUnits[0] >= l[w] ? l[w] : iTabAvailableUnits[0];
-                l[w] -= r[w][0];
-                iTabAvailableUnits[0] -= r[w][0];
-                if (l[w] == 0) {
+                r[v][0] = iTabAvailableUnits[0] >= l[v] ? l[v] : iTabAvailableUnits[0];
+                l[v] -= r[v][0];
+                iTabAvailableUnits[0] -= r[v][0];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[1] != 0) {
-                r[w][1] = iTabAvailableUnits[1] >= l[w] ? l[w] : iTabAvailableUnits[1];
-                l[w] -= r[w][1];
-                iTabAvailableUnits[1] -= r[w][1];
-                if (l[w] == 0) {
+                r[v][1] = iTabAvailableUnits[1] >= l[v] ? l[v] : iTabAvailableUnits[1];
+                l[v] -= r[v][1];
+                iTabAvailableUnits[1] -= r[v][1];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[2] != 0) {
-                r[w][2] = iTabAvailableUnits[2] >= l[w] ? l[w] : iTabAvailableUnits[2];
-                l[w] -= r[w][2];
-                iTabAvailableUnits[2] -= r[w][2];
-                if (l[w] == 0) {
+                r[v][2] = iTabAvailableUnits[2] >= l[v] ? l[v] : iTabAvailableUnits[2];
+                l[v] -= r[v][2];
+                iTabAvailableUnits[2] -= r[v][2];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[3] != 0) {
-                r[w][3] = iTabAvailableUnits[3] >= l[w] ? l[w] : iTabAvailableUnits[3];
-                l[w] -= r[w][3];
-                iTabAvailableUnits[3] -= r[w][3];
-                if (l[w] == 0) {
+                r[v][3] = iTabAvailableUnits[3] >= l[v] ? l[v] : iTabAvailableUnits[3];
+                l[v] -= r[v][3];
+                iTabAvailableUnits[3] -= r[v][3];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[4] != 0) {
-                r[w][4] = iTabAvailableUnits[4] >= l[w] ? l[w] : iTabAvailableUnits[4];
-                l[w] -= r[w][4];
-                iTabAvailableUnits[4] -= r[w][4];
-                if (l[w] == 0) {
+                r[v][4] = iTabAvailableUnits[4] >= l[v] ? l[v] : iTabAvailableUnits[4];
+                l[v] -= r[v][4];
+                iTabAvailableUnits[4] -= r[v][4];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[5] != 0) {
-                r[w][5] = iTabAvailableUnits[5] >= l[w] ? l[w] : iTabAvailableUnits[5];
-                l[w] -= r[w][5];
-                iTabAvailableUnits[5] -= r[w][5];
-                if (l[w] == 0) {
+                r[v][5] = iTabAvailableUnits[5] >= l[v] ? l[v] : iTabAvailableUnits[5];
+                l[v] -= r[v][5];
+                iTabAvailableUnits[5] -= r[v][5];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[6] != 0) {
-                r[w][6] = iTabAvailableUnits[6] >= l[w] ? l[w] : iTabAvailableUnits[6];
-                l[w] -= r[w][6];
-                iTabAvailableUnits[6] -= r[w][6];
-                if (l[w] == 0) {
+                r[v][6] = iTabAvailableUnits[6] >= l[v] ? l[v] : iTabAvailableUnits[6];
+                l[v] -= r[v][6];
+                iTabAvailableUnits[6] -= r[v][6];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[7] != 0) {
-                r[w][7] = iTabAvailableUnits[7] >= l[w] ? l[w] : iTabAvailableUnits[7];
-                l[w] -= r[w][7];
-                iTabAvailableUnits[7] -= r[w][7];
-                if (l[w] == 0) {
+                r[v][7] = iTabAvailableUnits[7] >= l[v] ? l[v] : iTabAvailableUnits[7];
+                l[v] -= r[v][7];
+                iTabAvailableUnits[7] -= r[v][7];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[8] != 0) {
-                r[w][8] = iTabAvailableUnits[8] >= l[w] ? l[w] : iTabAvailableUnits[8];
-                l[w] -= r[w][8];
-                iTabAvailableUnits[8] -= r[w][8];
-                if (l[w] == 0) {
+                r[v][8] = iTabAvailableUnits[8] >= l[v] ? l[v] : iTabAvailableUnits[8];
+                l[v] -= r[v][8];
+                iTabAvailableUnits[8] -= r[v][8];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[9] != 0) {
-                r[w][9] = iTabAvailableUnits[9] >= l[w] ? l[w] : iTabAvailableUnits[9];
-                l[w] -= r[w][9];
-                iTabAvailableUnits[9] -= r[w][9];
-                if (l[w] == 0) {
+                r[v][9] = iTabAvailableUnits[9] >= l[v] ? l[v] : iTabAvailableUnits[9];
+                l[v] -= r[v][9];
+                iTabAvailableUnits[9] -= r[v][9];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[10] != 0) {
-                r[w][10] = iTabAvailableUnits[10] >= l[w] ? l[w] : iTabAvailableUnits[10];
-                l[w] -= r[w][10];
-                iTabAvailableUnits[10] -= r[w][10];
-                if (l[w] == 0) {
+                r[v][10] = iTabAvailableUnits[10] >= l[v] ? l[v] : iTabAvailableUnits[10];
+                l[v] -= r[v][10];
+                iTabAvailableUnits[10] -= r[v][10];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[11] != 0) {
-                r[w][11] = iTabAvailableUnits[11] >= l[w] ? l[w] : iTabAvailableUnits[11];
-                l[w] -= r[w][11];
-                iTabAvailableUnits[11] -= r[w][11];
-                if (l[w] == 0) {
+                r[v][11] = iTabAvailableUnits[11] >= l[v] ? l[v] : iTabAvailableUnits[11];
+                l[v] -= r[v][11];
+                iTabAvailableUnits[11] -= r[v][11];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[12] != 0) {
-                r[w][12] = iTabAvailableUnits[12] >= l[w] ? l[w] : iTabAvailableUnits[12];
-                l[w] -= r[w][12];
-                iTabAvailableUnits[12] -= r[w][12];
-                if (l[w] == 0) {
+                r[v][12] = iTabAvailableUnits[12] >= l[v] ? l[v] : iTabAvailableUnits[12];
+                l[v] -= r[v][12];
+                iTabAvailableUnits[12] -= r[v][12];
+                if (l[v] == 0) {
                     continue
                 }
             }
             if (iTabAvailableUnits[13] != 0) {
-                r[w][13] = iTabAvailableUnits[13] >= l[w] ? l[w] : iTabAvailableUnits[13];
-                l[w] -= r[w][13];
-                iTabAvailableUnits[13] -= r[w][13]
+                r[v][13] = iTabAvailableUnits[13] >= l[v] ? l[v] : iTabAvailableUnits[13];
+                l[v] -= r[v][13];
+                iTabAvailableUnits[13] -= r[v][13]
             }
         }
         return iTabAvailableUnits
@@ -2348,24 +2255,6 @@ function Armee() {
                 r[0][v] += w[v]
             }
         }
-    };
-    this.computeFlood = function (v, w) {
-        l = new Array();
-        i = 0;
-        while (v < Math.floor(w * 1.4)) {
-            l[i++] = Math.floor(w * 0.2);
-            v += l[i - 1];
-            w -= l[i - 1]
-        }
-        limite = Math.floor((w * 2 - v) / 3) - 1;
-        if (limite > 0) {
-            l[i++] = limite;
-            v += l[i - 1];
-            w -= l[i - 1]
-        }
-        l[i++] = Math.floor(w * 0.2);
-        v += l[i - 1];
-        w -= l[i - 1]
     };
     this.getHuntRatio = function () {
         return e
@@ -2516,14 +2405,85 @@ function Armee() {
         diff = this.computeDifficulty(tdcDep, huntHF, huntNB);
         iTabDiff = this.computeDifficulties(tdcDep, huntHF, huntNB);
         this.affectUnitHunt(huntNB, diff, iTabDiff, this.getLossMax()[ind], 2);
+        this.afficherHunt(huntNB)
+    };
+    this.lancerHunt = function () {
+        tdcDep = parseInt(removeSpace($("#tdc_depart").val()));
+        huntNB = parseInt($("#nbr_chasse").val());
+        huntHF = parseInt(removeSpace($("#tdc_chasse").val()));
+        ratio = this.getTotalAtt(c) / this.computeDifficulty(tdcDep, huntHF, huntNB);
+        ind = this.getHuntRatio().indexOf(this.computeRefRatio(ratio));
+        diff = this.computeDifficulty(tdcDep, huntHF, huntNB);
+        iTabDiff = this.computeDifficulties(tdcDep, huntHF, huntNB);
+        this.affectUnitHunt(huntNB, diff, iTabDiff, this.getLossMax()[ind], 2);
+        this.afficherHunt(huntNB);
+        securiteKey = "";
+        securiteValue = "";
+        $("body").append("<iframe id='myFrame' style='display:none;' src='AcquerirTerrain.php' />");
+        $("#myFrame").load(function () {
+            securiteKey = $("#myFrame").contents().find("#tabChoixArmee input[type=hidden]").attr("name");
+            securiteValue = $("#myFrame").contents().find("#tabChoixArmee input[type=hidden]").attr("value");
+            $("#simulation table tr").slice(1, $("#simulation table tr").length - 1).each(function () {
+                $(this).addClass("red")
+            });
+            page.getArmee().sendHunt(huntHF, huntNB, securiteKey, securiteValue, 1)
+        })
+    };
+    this.sendHunt = function (v, x, w, y, z) {
+        if (r.length > 0 && w != "" && y != "") {
+            dataSend = {};
+            dataSend[w] = y;
+            dataSend.ChoixArmee = "1";
+            dataSend.AcquerirTerrain = v;
+            dataSend.unite1 = r[0][0];
+            dataSend.unite2 = r[0][1];
+            dataSend.unite3 = r[0][2];
+            dataSend.unite4 = r[0][3];
+            dataSend.unite5 = r[0][4];
+            dataSend.unite6 = r[0][5];
+            dataSend.unite7 = r[0][7];
+            dataSend.unite8 = r[0][8];
+            dataSend.unite9 = r[0][9];
+            dataSend.unite10 = r[0][10];
+            dataSend.unite11 = r[0][12];
+            dataSend.unite12 = r[0][13];
+            dataSend.unite13 = r[0][11];
+            dataSend.unite14 = r[0][6];
+            r.splice(0, 1);
+            $.ajax({
+                type: "post",
+                url: "/AcquerirTerrain.php",
+                cache: false,
+                data: dataSend,
+                dataType: "text",
+                error: function (C, A, B) {
+                    alert(A)
+                },
+                success: function (A) {
+                    $("#simulation tr:eq(" + (z) + ")").css("color", "green");
+                    if (A.indexOf("Vous n'avez pas") > -1) {
+                        $("#simulation tr:eq(" + (z) + ")").html("<td class='red'>" + z+++"</td><td colspan='14' class='red'>Vous n'avez pas assez de troupes.</td>")
+                    } else {
+                        $("#simulation tr:eq(" + (z) + ")").html("<td>" + z+++"</td><td colspan='14'>La chasse est lancée.</td>")
+                    } if (r.length == 0) {
+                        document.location = "/Ressources.php"
+                    } else {
+                        setTimeout(function () {
+                            page.getArmee().sendHunt(v, x, w, y, z)
+                        }, $("#intervalle_chasse").val() * 1000)
+                    }
+                }
+            })
+        }
+    };
+    this.afficherHunt = function (x) {
         total = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         if ($("#simulation").length) {
             $("#simulation").remove()
         }
-        boiteSimulation = "<br/><table id='simulation' class='boite_amelioration my_boite tab3' cellspacing=0>";
-        boiteSimulation += "<tr><td colspan=15><span class='titre'>Simulateur</span></td></tr>";
-        boiteSimulation += "<tr class='even'><td>Chasse</td><td>JSN</td><td>SN</td><td>NE</td><td>JS</td><td>S</td><td>C</td><td>CE</td><td>A</td><td>AE</td><td>SE</td><td>Tk</td><td>TkE</td><td>Tu</td><td>TuE</td></tr>";
-        for (var w = 0; w < huntNB; w++) {
+        boiteSimulation = "<br/><div id='simulation' class='boite_amelioration'><h2>Lanceur</h2>";
+        boiteSimulation += "<table cellspacing=0><tr class='even'><td>Chasse</td><td>JSN</td><td>SN</td><td>NE</td><td>JS</td><td>S</td><td>C</td><td>CE</td><td>A</td><td>AE</td><td>SE</td><td>Tk</td><td>TkE</td><td>Tu</td><td>TuE</td></tr>";
+        for (var w = 0; w < x; w++) {
             if (w % 2) {
                 boiteSimulation += "<tr class='even'>"
             } else {
@@ -2546,87 +2506,8 @@ function Armee() {
             boiteSimulation += "<td class='total'>" + formatNumber(total[v]) + "</td>"
         }
         boiteSimulation += "</tr>";
-        boiteSimulation += "</table>";
+        boiteSimulation += "</table></div>";
         $(".boite_amelioration:last").after(boiteSimulation)
-    };
-    this.lancerHunt = function () {
-        tdcDep = parseInt(removeSpace($("#tdc_depart").val()));
-        huntNB = parseInt($("#nbr_chasse").val());
-        huntHF = parseInt(removeSpace($("#tdc_chasse").val()));
-        ratio = this.getTotalAtt(c) / this.computeDifficulty(tdcDep, huntHF, huntNB);
-        ind = this.getHuntRatio().indexOf(this.computeRefRatio(ratio));
-        diff = this.computeDifficulty(tdcDep, huntHF, huntNB);
-        iTabDiff = this.computeDifficulties(tdcDep, huntHF, huntNB);
-        this.affectUnitHunt(huntNB, diff, iTabDiff, this.getLossMax()[ind], 2);
-        securiteKey = "";
-        securiteValue = "";
-        $("body").append("<iframe id='myFrame' style='display:none;' src='AcquerirTerrain.php' />");
-        $("#myFrame").load(function () {
-            securiteKey = $("#myFrame").contents().find("#tabChoixArmee input[type=hidden]").attr("name");
-            securiteValue = $("#myFrame").contents().find("#tabChoixArmee input[type=hidden]").attr("value");
-            page.getArmee().sendHunt(huntHF, huntNB, securiteKey, securiteValue, 1)
-        })
-    };
-    this.sendHunt = function (v, x, w, y, z) {
-        if (r.length > 0 && w != "" && y != "") {
-            mess = "Chasse " + (z++) + "/" + x + " envoyée !";
-            dataSend = {};
-            dataSend[w] = y;
-            dataSend.ChoixArmee = "1";
-            dataSend.AcquerirTerrain = v;
-            dataSend.unite1 = r[0][0];
-            mess += "\n JSN = " + formatNumber(r[0][0]);
-            dataSend.unite2 = r[0][1];
-            mess += "\n SN = " + formatNumber(r[0][1]);
-            dataSend.unite3 = r[0][2];
-            mess += "\n NE = " + formatNumber(r[0][2]);
-            dataSend.unite4 = r[0][3];
-            mess += "\n JS = " + formatNumber(r[0][3]);
-            dataSend.unite5 = r[0][4];
-            mess += "\n S = " + formatNumber(r[0][4]);
-            dataSend.unite6 = r[0][5];
-            mess += "\n C = " + formatNumber(r[0][5]);
-            dataSend.unite7 = r[0][7];
-            mess += "\n A = " + formatNumber(r[0][7]);
-            dataSend.unite8 = r[0][8];
-            mess += "\n AE = " + formatNumber(r[0][8]);
-            dataSend.unite9 = r[0][9];
-            mess += "\n SE = " + formatNumber(r[0][9]);
-            dataSend.unite10 = r[0][10];
-            mess += "\n Tk = " + formatNumber(r[0][10]);
-            dataSend.unite11 = r[0][12];
-            mess += "\n T = " + formatNumber(r[0][12]);
-            dataSend.unite12 = r[0][13];
-            mess += "\n TE = " + formatNumber(r[0][13]);
-            dataSend.unite13 = r[0][11];
-            mess += "\n TkE = " + formatNumber(r[0][11]);
-            dataSend.unite14 = r[0][6];
-            mess += "\n CE = " + formatNumber(r[0][6]);
-            r.splice(0, 1);
-            $.ajax({
-                type: "post",
-                url: "/AcquerirTerrain.php",
-                cache: false,
-                async: false,
-                data: dataSend,
-                dataType: "text",
-                error: function (C, A, B) {
-                    alert(A)
-                },
-                success: function () {
-                    alert(mess)
-                }
-            });
-            if (r.length == 0) {
-                document.location = "/Ressources.php"
-            } else {
-                setTimeout(function () {
-                    page.getArmee().sendHunt(v, x, w, y, z)
-                }, $("#intervalle_chasse").val() * 1000)
-            }
-        } else {
-            document.location = "/Ressources.php"
-        }
     };
     this.affectUnitHunt = function (z, B, v, y, x) {
         r = new Array();
@@ -2782,7 +2663,7 @@ function Box() {
         $("#boiteComptePlus .titre_colonne_cliquable").html("<a href='http://outiiil.fr/'>Outiiil 1.1</a>")
     };
     this.__constructBoxAD = function () {
-        boite = "<div id='boiteAD' class='boite_compte_plus'><div class='titre_colonne_cliquable'><a class='titre_compte_plus'>AD</a></div><div class='contenu_boite_compte_plus'><table></table></div></div>";
+        boite = "<div id='boiteAD' class='boite_compte_plus'><div class='titre_colonne_cliquable'><a class='titre_compte_plus'>Alliance Défensive</a></div><div class='contenu_boite_compte_plus'><table></table></div></div>";
         $("#menuBoite").append(boite);
         a.__initDataPlayer()
     }
@@ -3121,11 +3002,12 @@ function Utilitaire() {
         $.ajax({
             url: a + "liste_commande.php",
             dataType: "json",
+            timeout: 5000,
             xhrFields: {
                 withCredentials: true
             },
             error: function (p, o) {
-                alert("Désolé la procédure a echoué, veuillez réessayer plus tard !")
+                alert("Désolé, utilitaire indisponible, veuillez réessayer plus tard !")
             },
             success: function (o) {
                 if (o.errorcode == 0) {
@@ -3136,7 +3018,7 @@ function Utilitaire() {
                 } else {
                     $("#tabConvois").html("<tr><td>" + o.errortext + "</td></tr>")
                 }
-            },
+            }
         })
     };
     this.command = function (l, o, n) {
@@ -3261,7 +3143,7 @@ function Utilitaire() {
                 },
                 4: {
                     sorter: "myTime"
-                },
+                }
             },
             widgets: ["zebra"]
         })
@@ -3294,7 +3176,7 @@ function Utilitaire() {
                 quantite: l
             },
             error: function (o, n) {
-                alert("Désolé la procédure a echoué, veuillez réessayer plus tard !")
+                alert("Désolé, utilitaire indisponible, veuillez réessayer plus tard !")
             },
             success: function (n) {
                 alert(n.errortext);
@@ -3331,7 +3213,7 @@ function Utilitaire() {
                 date_apres: l
             },
             error: function (p, o) {
-                alert("Désolé la procédure a echoué, veuillez réessayer plus tard !")
+                alert("Désolé, utilitaire indisponible, veuillez réessayer plus tard !")
             },
             success: function (o) {
                 alert(o.errortext)
@@ -3348,11 +3230,12 @@ function Utilitaire() {
         $.ajax({
             url: a + "info_sdc.php",
             dataType: "json",
+            timeout: 5000,
             xhrFields: {
                 withCredentials: true
             },
             error: function (n, m) {
-                alert("Désolé, données indisponibles, veuillez réessayer plus tard !")
+                alert("Désolé, utilitaire indisponible, veuillez réessayer plus tard !")
             },
             success: function (m) {
                 if (m.errorcode == 0) {
@@ -3362,12 +3245,12 @@ function Utilitaire() {
                 } else {
                     $(".simulateur h2:first").after("<p>" + m.errortext + "</p>")
                 }
-            },
+            }
         })
     };
     this.status = function (l) {
-        $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showPlace' type='checkbox' name='showPlace'>Afficher Place</input></td><td colspan=2><input id='showLevel' type='checkbox' name='showLevel'>Afficher Niveau</input></td></tr>");
-        $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showOption' type='checkbox' name='showOption' checked>Afficher Option</input></td><td colspan=2><input id='showInfo' type='checkbox' name='showInfo' checked>Afficher Info</input></td></tr>");
+        $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showPlace' type='checkbox' name='showPlace'>Afficher Place</input></td><td colspan=2><input id='showLevel' type='checkbox' name='showLevel'>Afficher Niveaux</input></td></tr>");
+        $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showOption' type='checkbox' name='showOption' checked>Afficher Option</input></td><td colspan=2><input id='showInfo' type='checkbox' name='showInfo' checked>Afficher Temps</input></td></tr>");
         $("#tabMembresAlliance th:eq(1)").css("display", "none");
         $("#tabMembresAlliance th:eq(5)").css("display", "none");
         $("#tabMembresAlliance th:eq(6)").css("display", "none");
@@ -3485,6 +3368,7 @@ function Utilitaire() {
         $.ajax({
             url: a + "info_player.php",
             dataType: "json",
+            timeout: 5000,
             xhrFields: {
                 withCredentials: true
             },
@@ -3493,15 +3377,20 @@ function Utilitaire() {
                     f.activite = l.mul_tantieme;
                     f.solde = l.solde_virtuel;
                     f.tdc_virtuel = l.tdc_virtuel;
+                    f.ent_materiaux = l.ent_materiaux;
                     j.showDataPlayer()
                 }
-            },
+            }
         })
     };
     this.showDataPlayer = function () {
-        color = f.solde >= 0 ? "green" : "red";
-        line = "<tr title='Vous récoltez : " + b(f.tdc_virtuel * 48) + " / jour, " + b(f.tdc_virtuel * 48 * 31) + " / mois'><td><img alt='TDC' src='http://img3.fourmizzz.fr/images/icone/icone_tdc.gif' width='18' height='18'/></td><td>Terrain</td><td>" + formatNumber(f.tdc_virtuel) + " cm²</td></tr>";
-        line += "<tr title='limite à [-100%, 200%] de la capacité de votre entrepôt.'><td><img alt='materiaux' src='http://s1.fourmizzz.fr/images/smiley/wood.gif' width='18' height='18'/></td><td>Solde</td><td class='" + color + "'>" + formatNumber(f.solde) + "</td></tr>";
+        color = "";
+        capacity = Math.pow(2, f.ent_materiaux) * 1200 + 500;
+        if (f.solde >= 2 * capacity || f.solde <= -1 * capacity) {
+            color = "red"
+        }
+        line = "<tr title='Vous récoltez : " + b(f.tdc_virtuel * 48) + " / jour, " + b(f.tdc_virtuel * 48 * 31) + " / mois'><td>Terrain</td><td>" + formatNumber(f.tdc_virtuel) + " cm²</td><td><img alt='TDC' src='http://img3.fourmizzz.fr/images/icone/icone_tdc.gif' width='18' height='18'/></td></tr>";
+        line += "<tr class='lien' onclick='document.location.href=\"commerce.php\"' title='limite à [-100%, 200%] de la capacité de votre entrepôt.'><td>Solde</td><td class='" + color + "'>" + formatNumber(f.solde) + "</td><td><img alt='materiaux' src='http://s1.fourmizzz.fr/images/smiley/wood.gif' width='18' height='18'/></td></tr>";
         $("#boiteAD table").append(line)
     }
 };
@@ -3590,7 +3479,7 @@ function PageAlliance() {
                 totalADsien += parseInt(removeSpace($(this).find("td:eq(4)").text()))
             }
         });
-        contenu = "<br/><h2 style='text-align:left'>Informations</h2><br/><table class='tab_triable centre' style='width:100%' cellspacing='5'><tr class='even'><td class='gras' colspan=2>Récolteur</td><td class='gras' colspan=2>Passeur</td><td class='gras' colspan=2>Chasseur</td><td class='gras' colspan=2>ADsien</td></tr><tr><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td><td>Nombre</td><td>Terrain</td></tr><tr class='even'><td>" + nombreRecolteur + "</td><td>" + formatNumber(totalRecolteur) + "</td><td>" + nombrePasseur + "</td><td>" + formatNumber(totalPasseur) + "</td><td>" + nombreChasseur + "</td><td>" + formatNumber(totalChasseur) + "</td><td>" + nombreADsien + "</td><td>" + formatNumber(totalADsien) + "</td></tr><tr><td>" + (nombreRecolteur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalRecolteur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombrePasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalPasseur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombreChasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalChasseur * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td><td>" + (nombreADsien * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%</td><td>" + (totalADsien * 100 / parseInt(removeSpace($("#totalTerrain").text()))).toFixed(2) + "%</td></tr></table>";
+        contenu = "<br/><h2 style='text-align:left'>Informations</h2><br/><table class='gras tab_triable centre' style='width:100%' cellspacing='2'><tr class='even'><td>" + nombreRecolteur + " Récolteurs (" + (nombreRecolteur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%)</td><td>" + nombrePasseur + " Passeurs (" + (nombrePasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%)</td><td>" + nombreChasseur + " Chasseurs (" + (nombreChasseur * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%)</td><td>" + nombreADsien + " ADsiens (" + (nombreADsien * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%)</td></tr><tr><td>" + formatNumber(totalRecolteur) + " cm²</td><td>" + formatNumber(totalPasseur) + " cm²</td><td>" + formatNumber(totalChasseur) + " cm²</td><td>" + formatNumber(totalADsien) + " cm²</td></tr></table>";
         $("#tabMembresAlliance").after(contenu);
         a.__initAjax();
         b.__initStatus(a.getLevel()[6])
@@ -3811,7 +3700,7 @@ function PageArmee() {
             url: f,
             async: false,
             success: function (h) {
-                b = $(h).find("#centre center").text().split("- Vous allez attaquer").length - 1
+                b = $(h).text().split("- Vous allez attaquer").length - 1
             }
         })
     };
@@ -3949,32 +3838,36 @@ function PageAttaquer() {
     };
     this.__construct = function () {
         this.launcher();
-        this.launcherEvent();
-        this.optimizer();
-        this.optimizerEvent()
+        this.launcherEvent()
     };
     this.launcher = function () {
-        selectNbrFlood = "<select id='nbr_flood' class='my_input' title='Nombre de flood compris entre 0 et votre vitesse de chasse'>";
+        selectNbrFlood = "<select id='nbr_flood' class='my_input' title='Nombre de flood compris entre 0 et votre vitesse de chasse' disabled>";
         for (var f = 1; f < d.getLevel()[6] + 2; f++) {
             selectNbrFlood += "<option>" + f + "</option>"
         }
         selectNbrFlood += "</select>";
-        boite = "<fieldset><legend><span class='titre'>Lancer vos Floods</span></legend><center><table><tr><td>Nombre de flood</td><td>:</td><td>" + selectNbrFlood + "</td></tr><tr><td>Quantité par flood</td><td>:</td><td><input id='qte_flood' class='my_input' type='text' value='1 000 000' /></td></tr><tr class='centre'><td colspan=3><span class='retour'>Retour le " + b.getDate() + " " + e[b.getMonth()] + " à " + formatDateTime(b.getHours()) + "h" + formatDateTime(b.getMinutes()) + "</span></td></tr></table><input name='lancer' type='button' value='Lancer flood' /><p class='gras'>Info : Veuillez rester sur cette page le temps du lancement ! (1 secondes entre floods).</p></center></fieldset>";
+        boite = "<fieldset><legend><span class='titre'>Lancer vos Floods</span></legend><center><table id='tableOpti'><tr><td>TDC estimé à l'arrivée</td><td>:</td><td><input id='tdc_depart' class='my_input' type='text' value='" + formatNumber(parseInt($("#quantite_tdc").text())) + "' /></td></tr><tr><td>TDC estimé de la cible à l'arrivée</td><td>:</td><td><input id='tdc_cible' class='my_input' type='text' value='" + formatNumber(joueur2.getTerrain()) + "' /></td></tr><tr><td>Optimiser</td><td>:</td><td><input type='radio' name='opti' value='oui' checked/><label for='opti'>oui</label><input type='radio' name='opti' value='non'/><label for='opti'>non</label></td></tr><tr><td>Lancer le surplus d'armée</td><td>:</td><td><input type='radio' name='surplus' value='oui' id='oui'/><label for='oui'>oui</label><input type='radio' name='surplus' value='non' id='non' checked/><label for='non'>non</label></td></tr><tr class='grey'><td>Nombre de flood</td><td>:</td><td>" + selectNbrFlood + "</td></tr><tr class='grey'><td>Quantité par flood</td><td>:</td><td><input id='qte_flood' class='my_input' type='text' value='1 000 000' disabled/></td></tr><tr class='centre'><td colspan='3'><span class='retour'>Retour le " + b.getDate() + " " + e[b.getMonth()] + " à " + formatDateTime(b.getHours()) + "h" + formatDateTime(b.getMinutes()) + "</span></td></tr><tr class='centre'><td colspan='3'><input name='simuler' type='button' value='Simuler'/><input name='lancer' type='button' value='Lancer flood' /></td></tr></table><p class='gras'>Info : Veuillez rester sur cette page le temps du lancement ! (2 secondes entre floods).</p><p class='gras'>Info : Le surplus de l'armée est envoyé au premier ou deuxième flood selon le nombre de floods.</p></center></fieldset>";
         $("#formulaireChoixArmee").append(boite)
     };
     this.launcherEvent = function () {
+        $("input[name=opti]").change(function () {
+            if ($(this).val() != "oui") {
+                $("#nbr_flood").removeAttr("disabled");
+                $("#qte_flood").removeAttr("disabled");
+                $("input[name=surplus]").attr("disabled", "disabled");
+                $("#tableOpti tr:eq(3)").addClass("grey");
+                $("#tableOpti tr:eq(4), #tableOpti tr:eq(5)").removeClass("grey")
+            } else {
+                $("input[name=surplus]").removeAttr("disabled");
+                $("#nbr_flood").attr("disabled", "disabled");
+                $("#qte_flood").attr("disabled", "disabled");
+                $("#tableOpti tr:eq(3)").removeClass("grey");
+                $("#tableOpti tr:eq(4), #tableOpti tr:eq(5)").addClass("grey")
+            }
+        });
         $("#qte_flood").keyup(function () {
             $(this).val(formatNumber(removeSpace($(this).val())))
         });
-        $("input[name=lancer]").click(function () {
-            page.getArmee().lancerFlood()
-        })
-    };
-    this.optimizer = function () {
-        boite = "<fieldset><legend><span class='titre'>Optimiser vos Floods</span></legend><center><table id='tableOpti'><tr><td>TDC estimé à l'arrivée</td><td>:</td><td><input id='tdc_depart' class='my_input' type='text' value='" + formatNumber(parseInt($("#quantite_tdc").text())) + "' /></td></tr><tr><td>TDC estimé de la cible à l'arrivée</td><td>:</td><td><input id='tdc_cible' class='my_input' type='text' value='" + formatNumber(joueur2.getTerrain()) + "' /></td></tr><tr><td>Lancer le surplus d'armée</td><td>:</td><td><input type='radio' name='surplus' value='oui' id='oui'/><label for='oui'>oui</label><input type='radio' name='surplus' value='non' id='non' checked/><label for='non'>non</label></td></tr><tr class='centre'><td colspan=3><span class='retour'>Retour le " + b.getDate() + " " + e[b.getMonth()] + " à " + formatDateTime(b.getHours()) + "h" + formatDateTime(b.getMinutes()) + "</span></td></tr></table><input name='simuler' type='button' value='Simuler'/><input name='optimiser' type='button' value='Optimiser' /><p class='gras'>Info : Veuillez rester sur cette page le temps du lancement ! (1 secondes entre floods).</p><p class='gras'>Info : Le surplus de l'armée est envoyé au premier ou deuxième flood selon le nombre de floods.</p></center></fieldset>";
-        $("#formulaireChoixArmee").append(boite)
-    };
-    this.optimizerEvent = function () {
         $("#tdc_depart").keyup(function () {
             $(this).val(formatNumber(removeSpace($(this).val())))
         });
@@ -3984,8 +3877,8 @@ function PageAttaquer() {
         $("input[name=simuler]").click(function () {
             page.getArmee().simulerFlood()
         });
-        $("input[name=optimiser]").click(function () {
-            page.getArmee().optimiserFlood()
+        $("input[name=lancer]").click(function () {
+            page.getArmee().lancerFlood()
         })
     }
 };
@@ -4297,7 +4190,10 @@ function PageDescriptionAlliance() {
         totalTerrain = 0;
         totalConstruction = 0;
         totalTechno = 0;
-        $("#tabMembresAlliance tbody tr:gt(0)").each(function () {
+        $("#tabMembresAlliance tbody tr").each(function () {
+            if (comptePlus && $(this).index() == 0) {
+                return
+            }
             totalTerrain += parseInt(removeSpace($(this).find("td:eq(3)").text()));
             totalConstruction += parseInt($(this).find("td:eq(5)").text());
             totalTechno += parseInt($(this).find("td:eq(4)").text())
@@ -4626,10 +4522,14 @@ function PageRessource() {
             selectEtable += "<option>" + e + "</option>"
         }
         selectEtable += "</select>";
-        conteneur = "<table class='boite_amelioration my_boite' cellspacing='15'><tr><td colspan=4><span class='titre'>Terrain Exploitable</span></td></tr><tr><td>Nombre de convoi par jour</td><td>:</td><td class='left'><input id='nbr_convoi' class='my_input' type='text' value='0' /></td><td class='left'>Ex : 0, 0.5, 1.3, 4.658...</td></tr><tr><td>Colonisé</td><td>:</td><td class='left'><input type='radio' name='colonise' value='oui' id='oui' /><label for='oui'>oui</label><input type='radio' name='colonise' value='non' id='non' checked/><label for='non'>non</label></td><td></td></tr><tr><td>Etable colonisateur</td><td>:</td><td class='left'>" + selectEtable + "</td><td></td></tr><tr><td>Terrain exploitable</td><td>:</td><td id='tdc_exploitable' class='left'><strong>" + formatNumber(this.computeField()) + " cm²</strong></td><td></td></tr><tr><td colspan=4><strong>Info : sans colonie, sans part personnelle et avec toute vos ouvrières présentes.</strong></td><td></td></tr></table><br/>";
-        $("#boite_tdc").before(conteneur)
+        conteneur = "<br/><table id='boite_tdc_exploitable' class='boite_amelioration my_boite' cellspacing='15'><tr><td colspan=4><span class='titre'>Terrain Exploitable</span></td></tr><tr><td>Nombre d'ouvrière</td><td>:</td><td class='left'><input id='nbr_ouv' class='my_input' type='text' value='" + formatNumber($("#nb_ouvrieres").text()) + "' /></td><td></td></tr><tr><td>Nombre de convoi par jour</td><td>:</td><td class='left'><input id='nbr_convoi' class='my_input' type='text' value='0' /></td><td class='left'>Ex : 0, 0.5, 1.3, 4.658...</td></tr><tr><td>Colonisé</td><td>:</td><td class='left'><input type='radio' name='colonise' value='oui' id='oui' /><label for='oui'>oui</label><input type='radio' name='colonise' value='non' id='non' checked/><label for='non'>non</label></td><td></td></tr><tr><td>Etable colonisateur</td><td>:</td><td class='left'>" + selectEtable + "</td><td></td></tr><tr><td>Terrain exploitable</td><td>:</td><td id='tdc_exploitable' class='left'><strong>" + formatNumber(this.computeField()) + " cm²</strong></td><td></td></tr><tr><td colspan=4><strong>Info : sans colonie et sans part personnelle.</strong></td><td></td></tr></table><br/>";
+        $("#boite_tdc").after(conteneur)
     };
     this.calculatorEvent = function () {
+        $("#nbr_ouv").keyup(function () {
+            $(this).val(formatNumber(removeSpace($(this).val())));
+            $("#tdc_exploitable").html("<strong>" + formatNumber(page.computeField()) + " cm²</strong>")
+        });
         $("#nbr_convoi").keyup(function () {
             $("#tdc_exploitable").html("<strong>" + formatNumber(page.computeField()) + " cm²</strong>")
         });
@@ -4647,7 +4547,11 @@ function PageRessource() {
     };
     this.computeField = function () {
         nbConvoi = 0;
-        ouvriere = parseInt($("#nb_ouvrieres").text());
+        if ($("#nbr_ouv").length && $("#nbr_ouv").val() != "") {
+            ouvriere = parseInt(removeSpace($("#nbr_ouv").val()))
+        } else {
+            ouvriere = parseInt($("#nb_ouvrieres").text())
+        }
         etable = c.getLevel()[11];
         etableColo = parseInt($("#etable_colo").val());
         if ($("#nbr_convoi").length && $("#nbr_convoi").val() != "") {
@@ -4703,8 +4607,8 @@ function PageRessource() {
         } else {
             conteneur += "<tr><td>TDC estimé à l'arrivée</td><td>:</td><td class='left'><input id='tdc_depart' class='my_input' type='text' value='" + formatNumber(terrain) + "' /></td></tr>"
         }
-        conteneur += "<tr><td>Nombre de chasse</td><td>:</td><td class='left'>" + selectNbrChasse + "</td><td><input id='autoNumberHunt' type='checkbox' checked='checked' name='optionAuto' value='Auto'>Auto</input></td></tr><tr><td>TDC par chasse</td><td>:</td><td class='left'><input id='tdc_chasse' class='my_input' type='text' disabled='true'/></td><td><input id='autoFieldHunt' type='checkbox' checked='checked' name='optionAuto' value='Auto'>Auto</input></td></tr><tr><td>Total</td><td>:</td><td id='valueTotal' class='left'>0 cm²</td></tr><tr><td>Temps requis</td><td>:</td><td colspan=2 id='dureeTotal' class='left'>0 sec</td></tr><tr><td>Ratio ~ Référence</td><td>:</td><td id='ratio_chasse' class='left'>8.33 ~ 8.33</td></tr><tr><td>Difficulté</td><td>:</td><td class='left'>" + selectDiff + "</td></tr><tr><td>Perte estimé JSN</td><td>:</td><td colspan=2 id='perteJSN' class='left'></td></tr><tr><td>Garder des JSN</td><td>:</td><td class='left'><input id='keepJSN' class='my_input' type='text' name='keepJSN' value='0' /></td><td>max : " + formatNumber(jsn) + "</td></tr><tr><td>Intervalle entre les chasses</td><td>:</td><td class='left'>" + selectIntervalleChasse + "</td></tr><tr><td colspan=4><input type='button' id='simulate' value='Simuler'/><input type='button' id='envoyer' value='Envoyer'/></td></tr><tr><td colspan=4><span class='gras'>Info : Veuillez rester sur cette page le temps du lancement !</span></td></tr><tr><td colspan=4><span class='gras'>Info : Basé sur le simulateur de <span class='violet'>Calystene</span>.</span></td></tr></table>";
-        $("#boite_tdc").after(conteneur);
+        conteneur += "<tr><td>Nombre de chasse</td><td>:</td><td class='left'>" + selectNbrChasse + "</td><td><input id='autoNumberHunt' type='checkbox' checked='checked' name='optionAuto' value='Auto'>Auto</input></td></tr><tr><td>TDC par chasse</td><td>:</td><td class='left'><input id='tdc_chasse' class='my_input' type='text' disabled='true'/></td><td><input id='autoFieldHunt' type='checkbox' checked='checked' name='optionAuto' value='Auto'>Auto</input></td></tr><tr><td>Total</td><td>:</td><td id='valueTotal' class='left'>0 cm²</td></tr><tr><td>Temps requis</td><td>:</td><td colspan=2 id='dureeTotal' class='left'>0 sec</td></tr><tr><td>Ratio ~ Référence</td><td>:</td><td id='ratio_chasse' class='left'>8.33 ~ 8.33</td></tr><tr><td>Difficulté</td><td>:</td><td class='left'>" + selectDiff + "</td></tr><tr><td>Perte estimé JSN</td><td>:</td><td colspan=2 id='perteJSN' class='left'></td></tr><tr><td>Garder des JSN</td><td>:</td><td class='left'><input id='keepJSN' class='my_input' type='text' name='keepJSN' value='0' /></td><td>max : " + formatNumber(jsn) + "</td></tr><tr><td>Intervalle entre les chasses</td><td>:</td><td class='left'>" + selectIntervalleChasse + "</td></tr><tr><td colspan=4><input type='button' id='simulate' value='Simuler'/><input type='button' id='envoyer' value='Envoyer'/></td></tr><tr><td colspan=4><span class='gras'>Info : Veuillez rester sur cette page le temps du lancement !</span></td></tr><tr><td colspan=4><span class='gras'>Info : Basé sur le lanceur de <span class='violet'>Calystene</span>.</span></td></tr></table>";
+        $("#boite_tdc_exploitable").after(conteneur);
         a.computeData()
     };
     this.launcherEvent = function () {
