@@ -441,7 +441,7 @@ window.addEventListener('load', function () {
             box.__init();
             box.__construct();
         }
-        if ($("#tag_alliance").text() == "AD" && location.host.split('.')[0] == "s1" || !comptePlus) {
+        if ($("#tag_alliance").text() == "AD" && location.host == "s1.fourmizzz.fr") {
             box.__constructBoxAD();
         }
     }
@@ -2402,34 +2402,52 @@ function Armee() {
         tdcAtt = parseInt(removeSpace($("#tdc_depart").val()));
         tdcCible = parseInt(removeSpace($("#tdc_cible").val()));
         if (tdcCible >= (tdcAtt * 0.5) && tdcCible <= (tdcAtt * 3)) {
-            if ($("input[name=opti]:checked").val() == "oui") {
+            if ($("#methode").val() == 1) {
                 this.computeFlood(tdcAtt, tdcCible)
-            } else {
+            }
+            if ($("#methode").val() == 2) {
                 l = new Array();
                 for (var v = 0; v < parseInt($("#nbr_flood").val()); v++) {
                     l[v] = parseInt(removeSpace($("#qte_flood").val()))
                 }
             }
+            if ($("#methode").val() == 3) {
+                l = new Array();
+                tdctmp = tdcCible;
+                for (var v = 0; v < parseInt($("#nbr_flood").val()); v++) {
+                    prise = Math.floor(tdctmp * 0.2);
+                    tdctmp -= prise;
+                    l[v] = prise
+                }
+            }
             this.afficherFlood()
-        } else {
-            alert("Données incorrectes !")
         }
     };
     this.lancerFlood = function () {
         tdcAtt = parseInt(removeSpace($("#tdc_depart").val()));
         tdcCible = parseInt(removeSpace($("#tdc_cible").val()));
         if (tdcCible >= (tdcAtt * 0.5) && tdcCible <= (tdcAtt * 3)) {
-            if ($("input[name=opti]:checked").val() == "oui") {
+            if ($("#methode").val() == 1) {
                 this.computeFlood(tdcAtt, tdcCible)
-            } else {
+            }
+            if ($("#methode").val() == 2) {
                 l = new Array();
                 for (var v = 0; v < parseInt($("#nbr_flood").val()); v++) {
                     l[v] = parseInt(removeSpace($("#qte_flood").val()))
                 }
             }
+            if ($("#methode").val() == 3) {
+                l = new Array();
+                tdctmp = tdcCible;
+                for (var v = 0; v < parseInt($("#nbr_flood").val()); v++) {
+                    prise = Math.floor(tdctmp * 0.2);
+                    tdctmp -= prise;
+                    l[v] = prise
+                }
+            }
             this.afficherFlood();
             uniteRestante = this.affectUnitFlood();
-            if ($("input[name=opti]:checked").val() == "oui" && $("#oui").is(":checked")) {
+            if ($("#methode").val() == 1 && $("#oui").is(":checked")) {
                 this.affectTotalUnitFlood(uniteRestante)
             }
             this.sendFlood(1);
@@ -2494,11 +2512,12 @@ function Armee() {
     this.afficherFlood = function () {
         tdcAtt = parseInt(removeSpace($("#tdc_depart").val()));
         tdcCible = parseInt(removeSpace($("#tdc_cible").val()));
+        tdcTmp = tdcCible;
         nbAttDispo = d + 1 - p;
         if ($("#simulation").length) {
             $("#simulation").remove()
         }
-        boite = "<fieldset id='simulation'><legend><span class='titre'>Simulateur</span></legend><center><table class='tab2 centre' cellspacing=0><tr class='gras even'><td>Attaque</td><td>Troupe</td><td>Vous</td><td>Cible</td><td></td></tr><tr><td colspan='2'>Données initiales</td><td>" + formatNumber(tdcAtt) + "</td><td>" + formatNumber(tdcCible) + "</td><td></td></tr>";
+        boite = "<fieldset id='simulation'><legend><span class='titre'>Simulateur</span></legend><center><table class='tab2 centre' cellspacing=0><tr class='gras even'><td>Étape</td><td>Troupes</td><td>Votre TDC</td><td>TDC Cible</td><td></td></tr><tr><td colspan='2'>Données initiales</td><td>" + formatNumber(tdcAtt) + "</td><td>" + formatNumber(tdcCible) + "</td><td></td></tr>";
         for (var v = 0; v < l.length; v++) {
             if (v % 2) {
                 boite += "<tr>"
@@ -2506,12 +2525,13 @@ function Armee() {
                 boite += "<tr class='even'>"
             }
             boite += "<td>" + (v + 1) + "</td>";
-            pourcentage = Math.ceil(l[v] * 100 / tdcCible);
+            pourcentage = Math.ceil(l[v] * 100 / tdcTmp);
             prise = l[v];
             if (pourcentage > 20) {
                 pourcentage = 20;
-                prise = Math.floor(tdcCible * 0.2)
+                prise = Math.floor(tdcTmp * 0.2)
             }
+            tdcTmp -= prise;
             boite += "<td>" + formatNumber(l[v]) + " (" + pourcentage + " %)</td>";
             if (v + 1 > nbAttDispo) {
                 boite += "<td colspan='2'>VA insuffisante</td></tr>"
@@ -3459,7 +3479,7 @@ function Utilitaire() {
                 time = Math.ceil(Math.pow(0.9, n) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(k[m]["coord_x"] - l, 2) + Math.pow(k[m]["coord_y"] - o, 2)) / 350))));
                 contenu += "<td>" + formatTime(time) + "</td>";
                 if (k[m]["etat"] != "WAIT") {
-                    contenu += "<td><span id='commande_nou_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></td>"
+                    contenu += "<td><span id='commande_nou_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></span></td>"
                 } else {
                     contenu += "<td></td>"
                 }
@@ -3495,7 +3515,7 @@ function Utilitaire() {
                 time = Math.ceil(Math.pow(0.9, n) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(e[m]["coord_x"] - l, 2) + Math.pow(e[m]["coord_y"] - o, 2)) / 350))));
                 contenu += "<td>" + formatTime(time) + "</td>";
                 if (e[m]["etat"] != "WAIT") {
-                    contenu += "<td><span id='commande_mat_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></td>"
+                    contenu += "<td><span id='commande_mat_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></span></td>"
                 } else {
                     contenu += "<td></td>"
                 }
@@ -4254,40 +4274,47 @@ function PageAttaquer() {
         this.launcherEvent()
     };
     this.launcher = function () {
-        selectNbrFlood = "<select id='nbr_flood' class='my_input' title='Nombre de flood compris entre 0 et votre vitesse de chasse' disabled>";
+        selectNbrFlood = "<select id='nbr_flood' class='my_input' title='Nombre de flood compris entre 0 et votre vitesse de chasse'>";
         for (var f = 1; f < d.getLevel()[6] + 2; f++) {
             selectNbrFlood += "<option>" + f + "</option>"
         }
         selectNbrFlood += "</select>";
-        boite = "<fieldset><legend><span class='titre'>Lancer vos Floods</span></legend><center><table id='tableOpti'><tr><td>TDC estimé à l'arrivée</td><td>:</td><td><input id='tdc_depart' class='my_input' type='text' value='" + formatNumber(parseInt($("#quantite_tdc").text())) + "' /></td></tr><tr><td>TDC estimé de la cible à l'arrivée</td><td>:</td><td><input id='tdc_cible' class='my_input' type='text' value='" + formatNumber(joueur2.getTerrain()) + "' /></td></tr><tr><td>Optimiser</td><td>:</td><td><input type='radio' name='opti' value='oui' checked/><label for='opti'>oui</label><input type='radio' name='opti' value='non'/><label for='opti'>non</label></td></tr><tr><td>Lancer le surplus d'armée</td><td>:</td><td><input type='radio' name='surplus' value='oui' id='oui'/><label for='oui'>oui</label><input type='radio' name='surplus' value='non' id='non' checked/><label for='non'>non</label></td></tr><tr class='grey'><td>Nombre de flood</td><td>:</td><td>" + selectNbrFlood + "</td></tr><tr class='grey'><td>Quantité par flood</td><td>:</td><td><input id='qte_flood' class='my_input' type='text' value='1 000 000' disabled/></td></tr><tr class='centre'><td colspan='3'><span class='retour'>Retour le " + b.getDate() + " " + e[b.getMonth()] + " à " + formatDateTime(b.getHours()) + "h" + formatDateTime(b.getMinutes()) + "</span></td></tr><tr class='centre'><td colspan='3'><input name='simuler' type='button' value='Simuler'/><input name='lancer' type='button' value='Lancer flood' /></td></tr></table><p class='gras'>Info : Veuillez rester sur cette page le temps du lancement ! (2 secondes entre floods).</p><p class='gras'>Info : Le surplus de l'armée est envoyé au premier ou deuxième flood selon le nombre de floods.</p></center></fieldset>";
-        $("#formulaireChoixArmee").append(boite)
+        boite = "<fieldset><legend><span class='titre'>Lancer vos Attaques</span></legend><center><table id='tableOpti'><tr><td>Méthode</td><td>:</td><td><select id='methode' class='my_input'><option value='1'>Optimisée</option><option value='2'>Uniforme</option><option value='3'>Dégressive</option></select></td></tr><tr><td>TDC estimé à l'arrivée</td><td>:</td><td><input id='tdc_depart' class='my_input' type='text' value='" + formatNumber(parseInt($("#quantite_tdc").text())) + "' /></td></tr><tr><td>TDC estimé de la cible à l'arrivée</td><td>:</td><td><input id='tdc_cible' class='my_input' type='text' value='" + formatNumber(joueur2.getTerrain()) + "' /></td></tr><tr><td>Lancer le surplus d'armée</td><td>:</td><td><input type='radio' name='surplus' value='oui' id='oui'/><label for='oui'>oui</label><input type='radio' name='surplus' value='non' id='non' checked/><label for='non'>non</label></td></tr><tr style='display:none;'><td>Nombre d'attaques</td><td>:</td><td>" + selectNbrFlood + "</td></tr><tr style='display:none;'><td>Troupes par attaque</td><td>:</td><td><input id='qte_flood' class='my_input' type='text' value='1 000 000'/></td></tr><tr class='centre'><td colspan='3'><span class='retour'>Arrivée le " + b.getDate() + " " + e[b.getMonth()] + " à " + formatDateTime(b.getHours()) + "h" + formatDateTime(b.getMinutes()) + "</span></td></tr><tr class='centre'><td colspan='3'><input name='lancer' type='button' value='Lancer flood' /></td></tr></table><p class='gras'>Info : Veuillez rester sur cette page le temps du lancement ! (2 secondes entre floods).</p></center></fieldset>";
+        $("#formulaireChoixArmee").append(boite);
+        page.getArmee().simulerFlood()
     };
     this.launcherEvent = function () {
-        $("input[name=opti]").change(function () {
-            if ($(this).val() != "oui") {
-                $("#nbr_flood").removeAttr("disabled");
-                $("#qte_flood").removeAttr("disabled");
-                $("input[name=surplus]").attr("disabled", "disabled");
-                $("#tableOpti tr:eq(3)").addClass("grey");
-                $("#tableOpti tr:eq(4), #tableOpti tr:eq(5)").removeClass("grey")
-            } else {
-                $("input[name=surplus]").removeAttr("disabled");
-                $("#nbr_flood").attr("disabled", "disabled");
-                $("#qte_flood").attr("disabled", "disabled");
-                $("#tableOpti tr:eq(3)").removeClass("grey");
-                $("#tableOpti tr:eq(4), #tableOpti tr:eq(5)").addClass("grey")
+        $("#methode").change(function () {
+            if ($(this).val() == 1) {
+                $("input[name=surplus]").parent().parent().css("display", "");
+                $("#nbr_flood").parent().parent().css("display", "none");
+                $("#qte_flood").parent().parent().css("display", "none")
             }
+            if ($(this).val() == 2) {
+                $("input[name=surplus]").parent().parent().css("display", "none");
+                $("#nbr_flood").parent().parent().css("display", "");
+                $("#qte_flood").parent().parent().css("display", "")
+            }
+            if ($(this).val() == 3) {
+                $("input[name=surplus]").parent().parent().css("display", "none");
+                $("#nbr_flood").parent().parent().css("display", "");
+                $("#qte_flood").parent().parent().css("display", "none")
+            }
+            page.getArmee().simulerFlood()
+        });
+        $("#nbr_flood").change(function () {
+            page.getArmee().simulerFlood()
         });
         $("#qte_flood").keyup(function () {
-            $(this).val(formatNumber(removeSpace($(this).val())))
+            $(this).val(formatNumber(removeSpace($(this).val())));
+            page.getArmee().simulerFlood()
         });
         $("#tdc_depart").keyup(function () {
-            $(this).val(formatNumber(removeSpace($(this).val())))
+            $(this).val(formatNumber(removeSpace($(this).val())));
+            page.getArmee().simulerFlood()
         });
         $("#tdc_cible").keyup(function () {
-            $(this).val(formatNumber(removeSpace($(this).val())))
-        });
-        $("input[name=simuler]").click(function () {
+            $(this).val(formatNumber(removeSpace($(this).val())));
             page.getArmee().simulerFlood()
         });
         $("input[name=lancer]").click(function () {
