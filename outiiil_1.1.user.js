@@ -3459,7 +3459,7 @@ function Utilitaire() {
                 time = Math.ceil(Math.pow(0.9, n) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(k[m]["coord_x"] - l, 2) + Math.pow(k[m]["coord_y"] - o, 2)) / 350))));
                 contenu += "<td>" + formatTime(time) + "</td>";
                 if (k[m]["etat"] != "WAIT") {
-                    contenu += "<td><span id='command_nou_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></a></td>"
+                    contenu += "<td><span id='commande_nou_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></td>"
                 } else {
                     contenu += "<td></td>"
                 }
@@ -3495,7 +3495,7 @@ function Utilitaire() {
                 time = Math.ceil(Math.pow(0.9, n) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(e[m]["coord_x"] - l, 2) + Math.pow(e[m]["coord_y"] - o, 2)) / 350))));
                 contenu += "<td>" + formatTime(time) + "</td>";
                 if (e[m]["etat"] != "WAIT") {
-                    contenu += "<td><span id='commande_mat_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></a></td>"
+                    contenu += "<td><span id='commande_mat_" + m + "' class='cursor'><img title='livrer' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif'/></td>"
                 } else {
                     contenu += "<td></td>"
                 }
