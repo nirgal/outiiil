@@ -3733,7 +3733,7 @@ function Utilitaire() {
                     $(this).find("td:eq(0)").append(" <a href='/commerce.php?ID=" + d[r]["fourmizzz_id"] + "'><img title='Envoyer un convoi' src='/images/icone/icone_tdc.gif' alt='convoi' /></a>");
                     var s = $("#quantite_tdc").text();
                     var u = parseInt(removeSpace($(this).find("td:eq(4)").text()));
-                    if (u >= ((s * 0.5) + 1) && u <= ((s * 3) - 1) && $(this).find("td:eq(3)").text() != pseudo && d[r]["floodme"]) {
+                    if (u >= ((s * 0.5) + 1) && u <= ((s * 3) - 1) && $(this).find("td:eq(3)").text() != $("#pseudo").text() && d[r]["floodme"]) {
                         $(this).find("td:eq(4)").addClass("gras");
                         $(this).find("td:eq(4)").wrapInner("<a title='Attaquer' href='/ennemie.php?Attaquer=" + d[r]["fourmizzz_id"] + "&lieu=1' />")
                     }
