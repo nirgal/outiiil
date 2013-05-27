@@ -4433,7 +4433,7 @@ function PageConstruction() {
         c.__initAjax($("#pseudo").text());
         var d = a(c.getTechnologie());
         if (b["Champignonnière"] < d) {
-            $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='red'>" + d + "</span> <img src='http://outiiil.fr/images/question.png' alt='question' title='Niveau de champignonnière insuffisant, votre terrain de chasse virtuel est réduit de " + (d - b["Champignonnière"]) + "%.' />.")
+            $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='red'>" + d + "</span> <img src='http://outiiil.fr/images/question.png' alt='question' title='Niveau de champignonnière insuffisant, votre terrain de chasse virtuel est réduit de " + Math.round((d - b["Champignonnière"])*100./d) + "%.' />.")
         } else {
             $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='green'>" + d + "</span> .")
         }
