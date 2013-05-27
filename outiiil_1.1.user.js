@@ -4521,14 +4521,15 @@ function PageLaboratoire() {
         $.ajax({
                 url: "/laboratoire.php",
                 async: false,
-                success: function (c) {
-                    $(c).find(".ligneAmelioration").each(function () {
-                            a[$(this).find("h2").text()] = parseInt($(this).find(".niveau_amelioration").text().substring(6))
+                success: function (result) {
+                    var c = $('<div>').append(result);
+                    c.find(".ligneAmelioration").each(function () {
+                            a[$(this).find("h2").text()] = parseInt($(this).find(".niveau_amelioration").text().substring(6));
                         });
                     if (comptePlus) {
-                        var e = $(c).find("#centre strong:eq(0)").text();
+                        var e = c.find("#centre strong:eq(0)").text();
                         var d = e.substring(2, e.indexOf("termin") - 1);
-                        var e = $(c).find("#centre strong:eq(1)").text();
+                        var e = c.find("#centre strong:eq(1)").text();
                         var b = e.substring(2, e.indexOf("termin") - 1);
                         if (d == b) {
                             a[d] -= 2
