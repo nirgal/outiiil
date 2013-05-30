@@ -2,7 +2,7 @@
 // @author         Hraesvelg
 // @description	   Extension pour www.fourmizzz.fr
 // @match          http://*.fourmizzz.fr/*
-// @name           Outiiil - 1.1
+// @name           Outiiil
 // @namespace      http://www.outiiil.fr/
 // @require        http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @require        http://code.jquery.com/ui/1.10.1/jquery-ui.js
@@ -2747,14 +2747,15 @@ function Armee() {
                     error: function (K, I, J) {
                         alert(I)
                     },
-                    success: function (J) {
-                        var I = $(J).filter("#centre").contents().filter(function () {
+                    success: function (K) {
+                        var I = $("<div/>").append(K);
+                        var J = I.find("#centre").contents().filter(function () {
                                 return this.nodeType == 3
                             }).text();
-                        if (I.indexOf("Vos troupes sont en marche") == -1) {
-                            $("#simulation table tr:eq(" + (H + 1) + ")").html("<td class='red'>" + H + "</td><td colspan='3' class='red'>" + I + "</td>")
+                        if (J.indexOf("Vos troupes sont en marche") == -1) {
+                            $("#simulation table tr:eq(" + (H + 1) + ")").html("<td class='red'>" + H + "</td><td colspan='3' class='red'>" + J + "</td>")
                         } else {
-                            $("#simulation table tr:eq(" + (H + 1) + ")").html("<td class='green'>" + H+++"</td><td colspan='3' class='green'>" + I + "</td>")
+                            $("#simulation table tr:eq(" + (H + 1) + ")").html("<td class='green'>" + H+++"</td><td colspan='3' class='green'>" + J + "</td>")
                         } if (E.length == 0) {
                             document.location = "/Armee.php"
                         } else {
@@ -2996,11 +2997,12 @@ function Armee() {
         $.ajax({
                 url: "/AcquerirTerrain.php",
                 async: false,
-                success: function (N) {
+                success: function (O) {
+                    var N = $("<div/>").append(O);
                     $("#simulation table tr").slice(1, $("#simulation table tr").length - 1).each(function () {
                             $(this).addClass("red")
                         });
-                    armee.sendHunt(G, J, $(N).find("input[type=hidden]").attr("name"), $(N).find("input[type=hidden]").val(), 1)
+                    armee.sendHunt(G, J, N.find("table #t").attr("name"), N.find("table #t").val(), 1)
                 }
             })
     };
@@ -3731,9 +3733,10 @@ function Utilitaire() {
                     $(this).find("td:eq(0)").css("white-space", "nowrap");
                     $(this).find("td:eq(0)").append(" <a href='https://ad.nirgal.com/utilitaire/profil.php?user_id=" + d[r]["phpbb_id"] + "' target='_blank'><img title='Profil utilitaire' src='http://outiiil.fr/images/utilitaire.png' alt='chasse' /></a>");
                     $(this).find("td:eq(0)").append(" <a href='/commerce.php?ID=" + d[r]["fourmizzz_id"] + "'><img title='Envoyer un convoi' src='/images/icone/icone_tdc.gif' alt='convoi' /></a>");
+                    var t = $("#pseudo").text();
                     var s = $("#quantite_tdc").text();
-                    var u = parseInt(removeSpace($(this).find("td:eq(4)").text()));
-                    if (u >= ((s * 0.5) + 1) && u <= ((s * 3) - 1) && $(this).find("td:eq(3)").text() != $("#pseudo").text() && d[r]["floodme"]) {
+                    var v = parseInt(removeSpace($(this).find("td:eq(4)").text()));
+                    if (v >= ((s * 0.5) + 1) && v <= ((s * 3) - 1) && $(this).find("td:eq(3)").text() != t && d[r]["floodme"]) {
                         $(this).find("td:eq(4)").addClass("gras");
                         $(this).find("td:eq(4)").wrapInner("<a title='Attaquer' href='/ennemie.php?Attaquer=" + d[r]["fourmizzz_id"] + "&lieu=1' />")
                     }
@@ -3746,8 +3749,8 @@ function Utilitaire() {
                     if (d[r]["status_code"] == 4) {
                         $(this).find("td:eq(0)").append(" <img title='Ne pas flooder' src='http://outiiil.fr/images/croix.png' alt='noflood' />")
                     }
-                    var t = Math.ceil(Math.pow(0.9, q) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(d[r]["coord_x"] - d[$("#pseudo").text()]["coord_x"], 2) + Math.pow(d[r]["coord_y"] - d[$("#pseudo").text()]["coord_y"], 2)) / 350))));
-                    $(this).find("td:eq(10)").append(formatTime(t))
+                    var u = Math.ceil(Math.pow(0.9, q) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(d[r]["coord_x"] - d[t]["coord_x"], 2) + Math.pow(d[r]["coord_y"] - d[$("#pseudo").text()]["coord_y"], 2)) / 350))));
+                    $(this).find("td:eq(10)").append(formatTime(u))
                 }
             })
     };
@@ -3838,7 +3841,7 @@ function Utilitaire() {
     var l = function () {
         var s = Math.pow(2, m.ent_materiaux) * 1200 + 500;
         var r = (m.solde >= 2 * s || m.solde <= -1 * s) ? "red" : "";
-        var q = "<tr title='Vous récoltez : " + c(m.tdc_virtuel * 48) + " / jour, " + c(m.tdc_virtuel * 48 * 31) + " / mois'><td>Terrain</td><td>" + formatNumber(m.tdc_virtuel) + " cm²</td><td><img alt='TDC' src='http://img3.fourmizzz.fr/images/icone/icone_tdc.gif' width='18' height='18'/></td></tr><tr class='lien' onclick='document.location.href=\"commerce.php\"' title='limite à [-100%, 200%] de la capacité de votre entrepôt.'><td>Solde</td><td class='" + r + "'>" + formatNumber(m.solde) + "</td><td><img alt='materiaux' src='http://s1.fourmizzz.fr/images/smiley/wood.gif' width='18' height='18'/></td></tr>";
+        var q = "<tr title='Vous récoltez : " + c(m.tdc_virtuel * 48) + " / jour, " + c(m.tdc_virtuel * 48 * 31) + " / mois'><td>Terrain</td><td>" + formatNumber(m.tdc_virtuel) + " cm²</td><td><img alt='TDC' src='http://img3.fourmizzz.fr/images/icone/icone_tdc.gif' width='18' height='18'/></td></tr><tr class='lien' onclick='document.location.href=\"commerce.php\"' title='- " + formatNumber(s) + " ≤ Solde ≤ " + formatNumber(2 * s) + "'><td>Solde</td><td class='" + r + "'>" + formatNumber(m.solde) + "</td><td><img alt='materiaux' src='http://s1.fourmizzz.fr/images/smiley/wood.gif' width='18' height='18'/></td></tr>";
         $("#boiteAD table").append(q)
     };
     this.__initDataPlayer = function () {
@@ -4050,6 +4053,9 @@ function PageArmee() {
         $("#sondeTerrain").click(function () {
                 $("#nbTroupes").val(1);
                 $("#TerrainDestination").attr("checked", "checked");
+                if (!i.getSommeUnite()) {
+                    $("#FourmiliereOrigine").attr("checked", "checked")
+                }
                 $("input[name=Transferer]").click()
             });
         if (!(comptePlus)) {
@@ -4372,19 +4378,20 @@ function PageConstruction() {
         $.ajax({
                 url: "/construction.php",
                 async: false,
-                success: function (c) {
-                    $(c).find(".ligneAmelioration").each(function () {
+                success: function (d) {
+                    var c = $("<div/>").append(d);
+                    c.find(".ligneAmelioration").each(function () {
                             b[$(this).find("h2").text()] = parseInt($(this).find(".niveau_amelioration").text().substring(6))
                         });
                     if (comptePlus) {
-                        var f = $(c).find("#centre strong:eq(0)").text();
-                        var e = f.substring(2, f.indexOf("se termine") - 1);
-                        var f = $(c).find("#centre strong:eq(1)").text();
-                        var d = f.substring(2, f.indexOf("se termine") - 1);
-                        if (e == d) {
-                            b[e] -= 2
+                        var g = c.find("#centre strong:eq(0)").text();
+                        var f = g.substring(2, g.indexOf("se termine") - 1);
+                        var g = c.find("#centre strong:eq(1)").text();
+                        var e = g.substring(2, g.indexOf("se termine") - 1);
+                        if (f == e) {
+                            b[f] -= 2
                         } else {
-                            b[e] -= 1
+                            b[f] -= 1
                         }
                     }
                 }
@@ -4433,7 +4440,7 @@ function PageConstruction() {
         c.__initAjax($("#pseudo").text());
         var d = a(c.getTechnologie());
         if (b["Champignonnière"] < d) {
-            $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='red'>" + d + "</span> <img src='http://outiiil.fr/images/question.png' alt='question' title='Niveau de champignonnière insuffisant, votre terrain de chasse virtuel est réduit de " + Math.round((d - b["Champignonnière"])*100./d) + "%.' />.")
+            $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='red'>" + d + "</span> <img src='http://outiiil.fr/images/question.png' alt='question' title='Niveau de champignonnière insuffisant, votre terrain de chasse virtuel est réduit de " + Math.round((d - b["Champignonnière"]) * 100 / d) + "%.' />.")
         } else {
             $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='green'>" + d + "</span> .")
         }
@@ -4521,20 +4528,20 @@ function PageLaboratoire() {
         $.ajax({
                 url: "/laboratoire.php",
                 async: false,
-                success: function (result) {
-                    var c = $('<div>').append(result);
-                    c.find(".ligneAmelioration").each(function () {
-                            a[$(this).find("h2").text()] = parseInt($(this).find(".niveau_amelioration").text().substring(6));
+                success: function (d) {
+                    var b = $("<div/>").append(d);
+                    b.find(".ligneAmelioration").each(function () {
+                            a[$(this).find("h2").text()] = parseInt($(this).find(".niveau_amelioration").text().substring(6))
                         });
                     if (comptePlus) {
-                        var e = c.find("#centre strong:eq(0)").text();
-                        var d = e.substring(2, e.indexOf("termin") - 1);
-                        var e = c.find("#centre strong:eq(1)").text();
-                        var b = e.substring(2, e.indexOf("termin") - 1);
-                        if (d == b) {
-                            a[d] -= 2
+                        var f = b.find("#centre strong:eq(0)").text();
+                        var e = f.substring(2, f.indexOf("termin") - 1);
+                        var f = b.find("#centre strong:eq(1)").text();
+                        var c = f.substring(2, f.indexOf("termin") - 1);
+                        if (e == c) {
+                            a[e] -= 2
                         } else {
-                            a[d] -= 1
+                            a[e] -= 1
                         }
                     }
                 }
@@ -4873,6 +4880,10 @@ function PageRessource() {
         armee.__initAjax()
     };
     this.__constructor = function () {
+        if ($("#centre .titre:contains('Chasse en cours')").length) {
+            var g = $("#centre").text().split("Vos chasseuses vont conquérir").length - 1;
+            $("#centre .titre:contains('Chasse en cours')").html("Chasse(s) en cours " + g + ", reste : " + (b.getLevel("Vitesse de chasse") + 1 - g) + ".<br/>")
+        }
         e();
         c();
         f();
