@@ -5,7 +5,7 @@
 // @name           Outiiil
 // @namespace      http://www.outiiil.fr/
 // @version        1.2+nirgal2
-// @updateURL      https://github.com/nirgal/outiiil/raw/master/outiiil.user.js
+// @updateURL      http://localhost/outiiil_local.user.js
 // ==/UserScript==
 
 /*
@@ -28,10 +28,10 @@
 
 var GM_Style = document.createElement('link');
 GM_Style.rel = 'stylesheet';
-GM_Style.href = 'https://github.com/nirgal/outiiil/raw/master/outiiil.css';
+GM_Style.href = 'http://localhost/outiiil.css';
 document.getElementsByTagName('head')[0].appendChild(GM_Style);
 
 var GM_Loader = document.createElement('script');
-GM_Loader.src = 'https://github.com/nirgal/outiiil/raw/master/outiiil.js';
+GM_Loader.src = 'http://localhost/outiiil.js';
 GM_Loader.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(GM_Loader);
