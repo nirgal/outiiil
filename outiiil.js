@@ -3297,7 +3297,8 @@ function PageArmee() {
                 i.__initArmeeLoge();
                 g = $("#centre").text().split("- Vous allez attaquer").length - 1;
                 $("h3:eq(2)").append(" " + g + ", reste : " + (pageLaboratoire.getNiveau("Vitesse d'attaque") + 1 - g) + ".</p>");
-                $("#centre").prepend("<p class='centre'>Temps <span class='gras' title='Hall Of Fame' >HOF</span> de votre armée : <span class='gras'>" + f(j.getTime() + h.getTime() + i.getTime()) + "</span>.</p>");
+                if (connecte)
+                        $("#centre").prepend("<p class='centre'>Temps <span class='gras' title='Hall Of Fame' >HOF</span> de votre armée : <span class='gras'>" + f(j.getTime() + h.getTime() + i.getTime()) + "</span>.</p>");
                 var k = j.getSommeUnite() + h.getSommeUnite() + i.getSommeUnite();
                 if (k > 1) {
                         $("h3:first").append(" (" + (k).nombreFormate(0) + " unités)</p>")
