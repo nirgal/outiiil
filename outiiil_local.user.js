@@ -2,6 +2,7 @@
 // @author         Hraesvelg
 // @description    Extension pour www.fourmizzz.fr
 // @match          http://*.fourmizzz.fr/*
+// @match          http://*.antzzz.org/*
 // @name           Outiiil
 // @namespace      http://www.outiiil.fr/
 // @version        1.2+nirgal2
