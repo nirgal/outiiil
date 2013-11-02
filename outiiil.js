@@ -22,7 +22,7 @@
 var uri = location.pathname;
 connecte = $('.boite_connexion_titre').text() == "Connexion" ? false : true;
 comptePlus = $('#boiteComptePlus').find("table").length ? true : false;
-test_alliance = $("#tag_alliance").text() == "AD" && location.host.split('.')[0] == "s1";
+test_alliance = $("#tag_alliance").text() == "AD" && location.host == "s1.fourmizzz.fr";
 
 jTableSorter(jQuery);
 jColorPicker(jQuery);
