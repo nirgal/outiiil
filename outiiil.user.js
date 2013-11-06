@@ -5,7 +5,7 @@
 // @match          http://*.antzzz.org/*
 // @name           Outiiil
 // @namespace      http://www.outiiil.fr/
-// @version        1.2+nirgal2
+// @version        1.2+nirgal3
 // @updateURL      https://github.com/nirgal/outiiil/raw/master/outiiil.user.js
 // ==/UserScript==
 
@@ -29,6 +29,7 @@
 
 var GM_Style = document.createElement('link');
 GM_Style.rel = 'stylesheet';
+GM_Style.type = 'text/css';
 GM_Style.href = 'https://github.com/nirgal/outiiil/raw/master/outiiil.css';
 document.getElementsByTagName('head')[0].appendChild(GM_Style);
 
