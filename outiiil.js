@@ -3143,12 +3143,24 @@ function Utilitaire() {
                 })
         };
         var b = function () {
+                var content = "";
+                if (m.messages != undefined) {
+                        content += "<tr><td>Messages</td><td class=center>";
+                        var i;
+                        for (i=0; i<m.messages.length; ++i) {
+                                msg = m.messages[i];
+                                content += msg.unread + '<a href="' + msg.url + '" target=_tab><img src="' + msg.icon + '" width="18" height="18" title="'+msg.name+'" src="images/carte/rien.gif" alt="'+msg.name+'" style="vertical-align:bottom"></img></a> ';
+                        }
+                        content += '</td></tr>';
+                }
                 if (m.tdc_virtuel !== undefined) {
                         var s = Math.pow(2, m.ent_materiaux) * 1200 + 500;
                         var r = (m.solde >= 2 * s || m.solde <= -1 * s) ? "red" : "";
-                        var q = "<tr title='Vous récoltez : " + d(m.tdc_virtuel * 48) + " / jour, " + d(m.tdc_virtuel * 48 * 31) + " / mois'><td>Terrain</td><td>" + (m.tdc_virtuel).nombreFormate(0) + " cm²</td><td><img alt='TDC' src='http://img3.fourmizzz.fr/images/icone/icone_tdc.gif' width='18' height='18'/></td></tr><tr class='lien' onclick='document.location.href=\"commerce.php\"' title='- " + (s).nombreFormate(0) + " ≤ Solde ≤ " + (2 * s).nombreFormate(0) + "'><td>Solde</td><td class='" + r + "'>" + (m.solde).nombreFormate(0) + "</td><td><img alt='materiaux' src='http://s1.fourmizzz.fr/images/smiley/wood.gif' width='18' height='18'/></td></tr>";
+                        content += "<tr title='Vous récoltez : " + d(m.tdc_virtuel * 48) + " / jour, " + d(m.tdc_virtuel * 48 * 31) + " / mois'><td>Terrain</td><td>" + (m.tdc_virtuel).nombreFormate(0) + " cm²</td><td><img alt='TDC' src='http://img3.fourmizzz.fr/images/icone/icone_tdc.gif' width='18' height='18'/></td></tr><tr class='lien' onclick='document.location.href=\"commerce.php\"' title='- " + (s).nombreFormate(0) + " ≤ Solde ≤ " + (2 * s).nombreFormate(0) + "'><td>Solde</td><td class='" + r + "'>" + (m.solde).nombreFormate(0) + "</td><td><img alt='materiaux' src='http://s1.fourmizzz.fr/images/smiley/wood.gif' width='18' height='18'/></td></tr>";
+                }
+                if (content) {
                         $("#menuBoite").append("<div id='boiteAD' class='boite_compte_plus'><div class='titre_colonne_cliquable'><a class='titre_compte_plus'>Alliance Défensive</a></div><div class='contenu_boite_compte_plus'><table></table></div></div>");
-                        $("#boiteAD table").append(q);
+                        $("#boiteAD table").append(content);
                         var t = parseInt($("#boiteComptePlus").css("top")) + $(".contenu_boite_compte_plus").height() + 60;
                         $("#boiteAD").css({
                                 position: "absolute",
@@ -3171,6 +3183,7 @@ function Utilitaire() {
                                         m.solde = q.solde_virtuel;
                                         m.ent_materiaux = q.ent_materiaux;
                                         m.tdc_virtuel = q.tdc_virtuel;
+                                        m.messages = q.messages;
                                         b()
                                 }
                         }
