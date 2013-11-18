@@ -27,6 +27,9 @@ test_alliance = $("#tag_alliance").text() == "AD" && location.host == "s1.fourmi
 jTableSorter(jQuery);
 jColorPicker(jQuery);
 
+if (!comptePlus)
+        $("head").append('<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script><link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />');
+
 if (connecte) {
         box = new Box();
         if (!comptePlus)
