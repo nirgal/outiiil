@@ -3270,7 +3270,7 @@ function PageAlliance() {
         var a = function () {
                 var m = new PageLaboratoire();
                 var i = new Utilitaire();
-                var k = $("#tabMembresAlliance").text().match(/Convoyeur/g).length;
+                var k = $("#tabMembresAlliance").text().match(/Récolteur/g).length;
                 var d = 0;
                 var e = $("#tabMembresAlliance").text().match(/Passeur/g).length;
                 var g = 0;
@@ -3279,7 +3279,7 @@ function PageAlliance() {
                 var l = $("#tabMembresAlliance").text().match(/ADsien/g).length;
                 var j = 0;
                 $("#tabMembresAlliance tr").each(function () {
-                        if ($(this).find("td:eq(2)").text().indexOf("Convoyeur") != -1) {
+                        if ($(this).find("td:eq(2)").text().indexOf("Récolteur") != -1) {
                                 d += parseInt(supprEspace($(this).find("td:eq(4)").text()))
                         }
                         if ($(this).find("td:eq(2)").text().indexOf("Passeur") != -1) {
@@ -3292,7 +3292,7 @@ function PageAlliance() {
                                 j += parseInt(supprEspace($(this).find("td:eq(4)").text()))
                         }
                 });
-                var n = "<br/><br/><span class='retour'>Convoyeurs  (" + k + " - " + (k * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (d).nombreFormate(0) + " cm²</br>Passeurs (" + e + " - " + (e * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (g).nombreFormate(0) + " cm²</br>Chasseurs (" + h + " - " + (h * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (f).nombreFormate(0) + " cm²</br>ADsiens (" + l + " - " + (l * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (j).nombreFormate(0) + " cm²</br>";
+                var n = "<br/><br/><span class='retour'>Récolteurs  (" + k + " - " + (k * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (d).nombreFormate(0) + " cm²</br>Passeurs (" + e + " - " + (e * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (g).nombreFormate(0) + " cm²</br>Chasseurs (" + h + " - " + (h * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (f).nombreFormate(0) + " cm²</br>ADsiens (" + l + " - " + (l * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (j).nombreFormate(0) + " cm²</br>";
                 $(".retour").after(n);
                 m.__initAjax();
                 i.__initStatus(m.getNiveau("Vitesse d'attaque"))
