@@ -3673,11 +3673,10 @@ function PageConstruction() {
                         var h = i.substring(2, i.indexOf("se termine") - 1);
                         var i = $("#centre strong:eq(1)").text();
                         var f = i.substring(2, i.indexOf("se termine") - 1);
-                        if (h == f) {
-                                c[h] -= 2
-                        } else {
-                                c[h] -= 1
-                        }
+                        if (h)
+                               c[h]--;
+                        if (f)
+                               c[f]--;
                 }
                 var g = (21 + c["Etable à pucerons"]) * 40 * Math.pow(2, (c["Etable à pucerons"] + 3));
                 var e = (parseInt($("#nb_ouvrieres").text()) - parseInt($("#quantite_tdc").text())) > g ? "green" : "red";
@@ -3703,11 +3702,10 @@ function PageConstruction() {
                                         var h = i.substring(2, i.indexOf("se termine") - 1);
                                         var i = e.find("#centre strong:eq(1)").text();
                                         var g = i.substring(2, i.indexOf("se termine") - 1);
-                                        if (h == g) {
-                                                c[h] -= 2
-                                        } else {
-                                                c[h] -= 1
-                                        }
+                                        if (h)
+                                                c[h]--;
+                                        if (g)
+                                                c[g]--;
                                 }
                         }
                 })
@@ -3865,11 +3863,10 @@ function PageLaboratoire() {
                         var e = f.substring(2, f.indexOf("termin") - 1);
                         var f = $("#centre strong:eq(1)").text();
                         var d = f.substring(2, f.indexOf("termin") - 1);
-                        if (e == d) {
-                                b[e] -= 2
-                        } else {
-                                b[e] -= 1
-                        }
+                        if (e)
+                                b[e]--;
+                        if (d)
+                                b[d]--;
                 }
                 if (!(comptePlus)) {
                         c()
@@ -3892,13 +3889,10 @@ function PageLaboratoire() {
                                         var g = h.substring(2, h.indexOf("termin") - 1);
                                         var h = d.find("#centre strong:eq(1)").text();
                                         var e = h.substring(2, h.indexOf("termin") - 1);
-                                        if (g != "") {
-                                                if (g == e) {
-                                                        b[g] -= 2
-                                                } else {
-                                                        b[g] -= 1
-                                                }
-                                        }
+                                        if (g)
+                                                b[g]--;
+                                        if (e)
+                                                b[e]--;
                                 }
                         }
                 })
