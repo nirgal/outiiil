@@ -3681,7 +3681,7 @@ function PageConstruction() {
                 }
                 var g = (21 + c["Etable à pucerons"]) * 40 * Math.pow(2, (c["Etable à pucerons"] + 3));
                 var e = (parseInt($("#nb_ouvrieres").text()) - parseInt($("#quantite_tdc").text())) > g ? "green" : "red";
-                $(".desciption_amelioration:eq(11) table").append("<tr><td>Utile si:</td><td class='" + e + "'><img width='18' height='18' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif' alt='ouvrieres'/> > " + (g).nombreFormate(0) + "</td></tr>");
+                $(".desciption_amelioration:eq(11) table").append("<tr><td>Utile si:</td><td class='" + e + "'><img width='18' height='18' src='http://img3.fourmizzz.fr/images/icone/icone_ouvriere.gif' alt='ouvrieres'/> de livraison &gt; " + (g).nombreFormate(0) + "</td></tr>");
                 if (!(comptePlus)) {
                         d()
                 }
