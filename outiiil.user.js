@@ -5,7 +5,7 @@
 // @match          http://*.antzzz.org/*
 // @name           Outiiil
 // @namespace      http://www.outiiil.fr/
-// @version        1.2+nirgal3
+// @version        1.2+nirgal4
 // @updateURL      https://github.com/nirgal/outiiil/raw/master/outiiil.user.js
 // ==/UserScript==
 
@@ -27,11 +27,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var GM_Style = document.createElement('link');
-GM_Style.rel = 'stylesheet';
-GM_Style.type = 'text/css';
-GM_Style.href = 'https://github.com/nirgal/outiiil/raw/master/outiiil.css';
+var GM_Style = document.createElement('style');
 document.getElementsByTagName('head')[0].appendChild(GM_Style);
+GM_Style.innerHTML = '@import url("https://github.com/nirgal/outiiil/raw/master/outiiil.css");'
+// We need that work around because github send the wrong mime/type
 
 var GM_Loader = document.createElement('script');
 GM_Loader.src = 'https://github.com/nirgal/outiiil/raw/master/outiiil.js';
