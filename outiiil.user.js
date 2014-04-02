@@ -5,7 +5,7 @@
 // @match          http://*.antzzz.org/*
 // @name           Outiiil
 // @namespace      http://www.outiiil.fr/
-// @version        1.2+nirgal4
+// @version        1.2+nirgal5
 // @updateURL      https://github.com/nirgal/outiiil/raw/master/outiiil.user.js
 // ==/UserScript==
 
@@ -35,4 +35,5 @@ GM_Style.innerHTML = '@import url("https://github.com/nirgal/outiiil/raw/master/
 var GM_Loader = document.createElement('script');
 GM_Loader.src = 'https://github.com/nirgal/outiiil/raw/master/outiiil.js';
 GM_Loader.type = 'text/javascript';
+GM_Loader.charset = 'utf-8';
 document.getElementsByTagName('head')[0].appendChild(GM_Loader);
