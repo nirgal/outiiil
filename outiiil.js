@@ -3213,12 +3213,12 @@ function PageAlliance() {
                 var h = $("#pseudo").text();
                 var g = $("#quantite_tdc").text();
                 $("#tabMembresAlliance tbody tr:gt(0)").each(function () {
-                        e += parseInt(supprEspace($(this).find("td:eq(4)").text()));
-                        f += ~~($(this).find("td:eq(6)").text());
-                        d += ~~($(this).find("td:eq(5)").text());
-                        var i = parseInt(supprEspace($(this).find("td:eq(4)").text()));
+                        e += parseInt(supprEspace($(this).find("td:eq(5)").text()));
+                        f += ~~($(this).find("td:eq(8)").text());
+                        d += ~~($(this).find("td:eq(7)").text());
+                        var i = parseInt(supprEspace($(this).find("td:eq(5)").text()));
                         if (i >= ((g * 0.5) + 1) && i <= ((g * 3) - 1) && $(this).find("td:eq(3)").text() != h) {
-                                $(this).find("td:eq(4)").addClass("bleu")
+                                $(this).find("td:eq(5)").addClass("bleu")
                         }
                 });
                 $(".simulateur table[class='ligne_paire'] tr:eq(0) td:eq(1)").append("  (" + $("img[alt='Actif']").length + ")");
