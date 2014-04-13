@@ -3016,12 +3016,12 @@ function Utilitaire() {
                 $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showPlace' type='checkbox' name='showPlace'>Afficher Place</input></td><td colspan=2><input id='showLevel' type='checkbox' name='showLevel'>Afficher Niveaux</input></td></tr>");
                 $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showOption' type='checkbox' name='showOption' checked>Afficher Option</input></td><td colspan=2><input id='showInfo' type='checkbox' name='showInfo' checked>Afficher Temps</input></td></tr>");
                 $("#tabMembresAlliance th:eq(1)").css("display", "none");
-                $("#tabMembresAlliance th:eq(7)").css("display", "none");
-                $("#tabMembresAlliance th:eq(8)").css("display", "none");
+                $("#tabMembresAlliance th:eq(5)").css("display", "none");
+                $("#tabMembresAlliance th:eq(6)").css("display", "none");
                 $("#tabMembresAlliance tr:eq(0)").append("<th style='width:120px'>Temps de trajet</th>");
                 $("#tabMembresAlliance tfoot td:eq(1)").css("display", "none");
-                $("#tabMembresAlliance tfoot td:eq(7)").css("display", "none");
-                $("#tabMembresAlliance tfoot td:eq(8)").css("display", "none");
+                $("#tabMembresAlliance tfoot td:eq(5)").css("display", "none");
+                $("#tabMembresAlliance tfoot td:eq(6)").css("display", "none");
                 $("#tabMembresAlliance tbody tr").each(function () {
                         $(this).find("td:eq(1)").css("display", "none");
                         $(this).find("td:eq(7)").css("display", "none");
@@ -3057,7 +3057,7 @@ function Utilitaire() {
                                         $(this).find("td:eq(0)").append(" <img title='Ne pas flooder' src='http://outiiil.fr/images/outiiil/croix.png' alt='noflood' />")
                                 }
                                 var u = Math.ceil(Math.pow(0.9, q) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(e[r]["coord_x"] - e[t]["coord_x"], 2) + Math.pow(e[r]["coord_y"] - e[$("#pseudo").text()]["coord_y"], 2)) / 350))));
-                                $(this).find("td:eq(11)").append(timeFormate(u))
+                                $(this).find("td:eq(12)").append(timeFormate(u));
                         }
                 })
         };
@@ -3077,15 +3077,15 @@ function Utilitaire() {
                 });
                 $("#showLevel").click(function () {
                         if ($(this).is(":checked")) {
-                                $("#tabMembresAlliance th:eq(7)").css("display", "");
-                                $("#tabMembresAlliance th:eq(8)").css("display", "");
+                                $("#tabMembresAlliance th:eq(5)").css("display", "");
+                                $("#tabMembresAlliance th:eq(6)").css("display", "");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(7)").css("display", "");
                                         $(this).find("td:eq(8)").css("display", "")
                                 })
                         } else {
-                                $("#tabMembresAlliance th:eq(7)").css("display", "none");
-                                $("#tabMembresAlliance th:eq(8)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(5)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(6)").css("display", "none");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(7)").css("display", "none");
                                         $(this).find("td:eq(8)").css("display", "none")
@@ -3095,28 +3095,28 @@ function Utilitaire() {
                 $("#showOption").click(function () {
                         if ($(this).is(":checked")) {
                                 $("#tabMembresAlliance th:eq(0)").css("display", "");
-                                $("#tabMembresAlliance th:eq(10)").css("display", "");
+                                $("#tabMembresAlliance th:eq(8)").css("display", "");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(0)").css("display", "");
-                                        $(this).find("td:eq(11)").css("display", "")
+                                        $(this).find("td:eq(10)").css("display", "");
                                 })
                         } else {
                                 $("#tabMembresAlliance th:eq(0)").css("display", "none");
-                                $("#tabMembresAlliance th:eq(10)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(8)").css("display", "none");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(0)").css("display", "none");
-                                        $(this).find("td:eq(11)").css("display", "none")
+                                        $(this).find("td:eq(10)").css("display", "none");
                                 })
                         }
                 });
                 $("#showInfo").click(function () {
                         if ($(this).is(":checked")) {
-                                $("#tabMembresAlliance th:eq(11)").css("display", "");
+                                $("#tabMembresAlliance th:eq(9)").css("display", "");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(12)").css("display", "")
                                 })
                         } else {
-                                $("#tabMembresAlliance th:eq(11)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(9)").css("display", "none");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(12)").css("display", "none")
                                 })
@@ -3280,16 +3280,16 @@ function PageAlliance() {
                 var j = 0;
                 $("#tabMembresAlliance tr").each(function () {
                         if ($(this).find("td:eq(2)").text().indexOf("Récolteur") != -1) {
-                                d += parseInt(supprEspace($(this).find("td:eq(4)").text()))
+                                d += parseInt(supprEspace($(this).find("td:eq(5)").text()))
                         }
                         if ($(this).find("td:eq(2)").text().indexOf("Passeur") != -1) {
-                                g += parseInt(supprEspace($(this).find("td:eq(4)").text()))
+                                g += parseInt(supprEspace($(this).find("td:eq(5)").text()))
                         }
                         if ($(this).find("td:eq(2)").text().indexOf("CHASSEUR") != -1) {
-                                f += parseInt(supprEspace($(this).find("td:eq(4)").text()))
+                                f += parseInt(supprEspace($(this).find("td:eq(5)").text()))
                         }
                         if ($(this).find("td:eq(2)").text().indexOf("ADsien") != -1) {
-                                j += parseInt(supprEspace($(this).find("td:eq(4)").text()))
+                                j += parseInt(supprEspace($(this).find("td:eq(5)").text()))
                         }
                 });
                 var n = "<br/><br/><span class='retour'>Récolteurs  (" + k + " - " + (k * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (d).nombreFormate(0) + " cm²</br>Passeurs (" + e + " - " + (e * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (g).nombreFormate(0) + " cm²</br>Chasseurs (" + h + " - " + (h * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (f).nombreFormate(0) + " cm²</br>ADsiens (" + l + " - " + (l * 100 / ($("#tabMembresAlliance tr").length - 1)).toFixed(2) + "%) : " + (j).nombreFormate(0) + " cm²</br>";
