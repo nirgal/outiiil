@@ -3016,25 +3016,25 @@ function Utilitaire() {
                 $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showPlace' type='checkbox' name='showPlace'>Afficher Place</input></td><td colspan=2><input id='showLevel' type='checkbox' name='showLevel'>Afficher Niveaux</input></td></tr>");
                 $(".simulateur table[class='ligne_paire']").append("<tr><td colspan=2><input id='showOption' type='checkbox' name='showOption' checked>Afficher Option</input></td><td colspan=2><input id='showInfo' type='checkbox' name='showInfo' checked>Afficher Temps</input></td></tr>");
                 $("#tabMembresAlliance th:eq(1)").css("display", "none");
-                $("#tabMembresAlliance th:eq(5)").css("display", "none");
-                $("#tabMembresAlliance th:eq(6)").css("display", "none");
+                $("#tabMembresAlliance th:eq(7)").css("display", "none");
+                $("#tabMembresAlliance th:eq(8)").css("display", "none");
                 $("#tabMembresAlliance tr:eq(0)").append("<th style='width:120px'>Temps de trajet</th>");
                 $("#tabMembresAlliance tfoot td:eq(1)").css("display", "none");
-                $("#tabMembresAlliance tfoot td:eq(5)").css("display", "none");
-                $("#tabMembresAlliance tfoot td:eq(6)").css("display", "none");
+                $("#tabMembresAlliance tfoot td:eq(7)").css("display", "none");
+                $("#tabMembresAlliance tfoot td:eq(8)").css("display", "none");
                 $("#tabMembresAlliance tbody tr").each(function () {
                         $(this).find("td:eq(1)").css("display", "none");
-                        $(this).find("td:eq(5)").css("display", "none");
-                        $(this).find("td:eq(6)").css("display", "none");
+                        $(this).find("td:eq(7)").css("display", "none");
+                        $(this).find("td:eq(8)").css("display", "none");
                         if ($(this).index() >= 0) {
                                 $(this).append("<td align='center'></td>")
                         }
-                        var r = $(this).find("td:eq(3)").text();
+                        var r /* nick */= $(this).find("td:eq(3)").text();
                         if (r in e) {
                                 if (e[r]["colonisateur"]) {
-                                        $(this).find("td:eq(8) img").attr("title", "Colonisé par : " + e[r]["colonisateur"]);
+                                        $(this).find("td:eq(10) img").attr("title", "Colonisé par : " + e[r]["colonisateur"]);
                                         if (!(e[r]["colonisateur"] in e)) {
-                                                $(this).find("td:eq(8) img").attr("src", "http://outiiil.fr/images/outiiil/attention.gif")
+                                                $(this).find("td:eq(10) img").attr("src", "http://outiiil.fr/images/outiiil/attention.gif")
                                         }
                                 }
                                 $(this).find("td:eq(0)").removeAttr("align");
@@ -3042,10 +3042,10 @@ function Utilitaire() {
                                 $(this).find("td:eq(0)").append(" <a href='https://ad.nirgal.com/utilitaire/profil.php?user_id=" + e[r]["phpbb_id"] + "' target='_blank'><img title='Profil utilitaire' src='http://outiiil.fr/images/outiiil/utilitaire.png' alt='chasse' /></a>");
                                 var t = $("#pseudo").text();
                                 var s = $("#quantite_tdc").text();
-                                var v = parseInt(supprEspace($(this).find("td:eq(4)").text()));
+                                var v = parseInt(supprEspace($(this).find("td:eq(5)").text()));
                                 if (v >= ((s * 0.5) + 1) && v <= ((s * 3) - 1) && $(this).find("td:eq(3)").text() != t && e[r]["floodme"]) {
-                                        $(this).find("td:eq(4)").addClass("gras");
-                                        $(this).find("td:eq(4)").wrapInner("<a title='Attaquer' href='/ennemie.php?Attaquer=" + e[r]["fourmizzz_id"] + "&lieu=1' />")
+                                        $(this).find("td:eq(5)").addClass("gras");
+                                        $(this).find("td:eq(5)").wrapInner("<a title='Attaquer' href='/ennemie.php?Attaquer=" + e[r]["fourmizzz_id"] + "&lieu=1' />")
                                 }
                                 if (e[r]["status_code"] == 2) {
                                         $(this).find("td:eq(0)").append(" <img title='En chasse' src='http://img3.fourmizzz.fr/images/icone/icone_chasse.gif' alt='chasse' />")
@@ -3057,7 +3057,7 @@ function Utilitaire() {
                                         $(this).find("td:eq(0)").append(" <img title='Ne pas flooder' src='http://outiiil.fr/images/outiiil/croix.png' alt='noflood' />")
                                 }
                                 var u = Math.ceil(Math.pow(0.9, q) * 637200 * (1 - Math.exp(-(Math.sqrt(Math.pow(e[r]["coord_x"] - e[t]["coord_x"], 2) + Math.pow(e[r]["coord_y"] - e[$("#pseudo").text()]["coord_y"], 2)) / 350))));
-                                $(this).find("td:eq(10)").append(timeFormate(u))
+                                $(this).find("td:eq(11)").append(timeFormate(u))
                         }
                 })
         };
@@ -3077,48 +3077,48 @@ function Utilitaire() {
                 });
                 $("#showLevel").click(function () {
                         if ($(this).is(":checked")) {
-                                $("#tabMembresAlliance th:eq(5)").css("display", "");
-                                $("#tabMembresAlliance th:eq(6)").css("display", "");
+                                $("#tabMembresAlliance th:eq(7)").css("display", "");
+                                $("#tabMembresAlliance th:eq(8)").css("display", "");
                                 $("#tabMembresAlliance tr").each(function () {
-                                        $(this).find("td:eq(5)").css("display", "");
-                                        $(this).find("td:eq(6)").css("display", "")
+                                        $(this).find("td:eq(7)").css("display", "");
+                                        $(this).find("td:eq(8)").css("display", "")
                                 })
                         } else {
-                                $("#tabMembresAlliance th:eq(5)").css("display", "none");
-                                $("#tabMembresAlliance th:eq(6)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(7)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(8)").css("display", "none");
                                 $("#tabMembresAlliance tr").each(function () {
-                                        $(this).find("td:eq(5)").css("display", "none");
-                                        $(this).find("td:eq(6)").css("display", "none")
+                                        $(this).find("td:eq(7)").css("display", "none");
+                                        $(this).find("td:eq(8)").css("display", "none")
                                 })
                         }
                 });
                 $("#showOption").click(function () {
                         if ($(this).is(":checked")) {
                                 $("#tabMembresAlliance th:eq(0)").css("display", "");
-                                $("#tabMembresAlliance th:eq(8)").css("display", "");
+                                $("#tabMembresAlliance th:eq(10)").css("display", "");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(0)").css("display", "");
-                                        $(this).find("td:eq(9)").css("display", "")
+                                        $(this).find("td:eq(11)").css("display", "")
                                 })
                         } else {
                                 $("#tabMembresAlliance th:eq(0)").css("display", "none");
-                                $("#tabMembresAlliance th:eq(8)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(10)").css("display", "none");
                                 $("#tabMembresAlliance tr").each(function () {
                                         $(this).find("td:eq(0)").css("display", "none");
-                                        $(this).find("td:eq(9)").css("display", "none")
+                                        $(this).find("td:eq(11)").css("display", "none")
                                 })
                         }
                 });
                 $("#showInfo").click(function () {
                         if ($(this).is(":checked")) {
-                                $("#tabMembresAlliance th:eq(9)").css("display", "");
+                                $("#tabMembresAlliance th:eq(11)").css("display", "");
                                 $("#tabMembresAlliance tr").each(function () {
-                                        $(this).find("td:eq(10)").css("display", "")
+                                        $(this).find("td:eq(12)").css("display", "")
                                 })
                         } else {
-                                $("#tabMembresAlliance th:eq(9)").css("display", "none");
+                                $("#tabMembresAlliance th:eq(11)").css("display", "none");
                                 $("#tabMembresAlliance tr").each(function () {
-                                        $(this).find("td:eq(10)").css("display", "none")
+                                        $(this).find("td:eq(12)").css("display", "none")
                                 })
                         }
                 })
