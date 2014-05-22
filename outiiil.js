@@ -2818,7 +2818,7 @@ function Utilitaire() {
                                 } else {
                                         t += "<tr>"
                                 }
-                                t += "<td>" + k[r]["pseudo"] + "</td><td><img src='http://img3.fourmizzz.fr/images/icone/icone_bois.gif'/></td><td class='right'>" + (k[r]["reste"]).nombreFormate(0) + "</td>";
+                                t += "<td>" + k[r]["pseudo"] + "</td><td><img width='18' heigth='18' src='http://img3.fourmizzz.fr/images/icone/icone_bois.gif'/></td><td class='right'>" + (k[r]["reste"]).nombreFormate(0) + "</td>";
                                 if (k[r]["etat"] == "P1") {
                                         s += parseInt(k[r]["reste"]);
                                         t += "<td><img src='http://img3.fourmizzz.fr/images/icone/3rondrouge.gif' /></td>"
