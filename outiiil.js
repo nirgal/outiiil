@@ -32,9 +32,10 @@ if (!comptePlus)
 
 if (connecte) {
         box = new Box();
-        if (!comptePlus)
+        if (!comptePlus) {
                 box.__construct();
-        box.__initChasse();
+                box.__initChasse();
+        }
 
         if (test_alliance) {
                 utilitaire = new Utilitaire();
