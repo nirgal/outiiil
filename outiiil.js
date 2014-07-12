@@ -3732,7 +3732,7 @@ function PageConstruction() {
                 f.__initAjax();
                 var e = b(f.getSommeNiveau());
                 if (c["Champignonnière"] < e) {
-                        $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='red'>" + e + "</span> <img src='http://outiiil.fr/images/outiiil/question.png' alt='question' title='Niveau de champignonnière insuffisant, votre terrain de chasse virtuel est réduit de " + Math.round((e - c["Champignonnière"]) * 100 / e) + "%.' />.")
+                        $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='red'>" + e + "</span> <img src='http://outiiil.fr/images/outiiil/question.png' alt='question' title='Niveau de champignonnière insuffisant, votre terrain de chasse virtuel est réduit de " + (e - c["Champignonnière"]) + "%.' />.")
                 } else {
                         $(".desciption_amelioration:eq(0) div br:eq(2)").after("Demandé : <span class='green'>" + e + "</span>.")
                 }
@@ -3745,6 +3745,7 @@ function PageConstruction() {
                 })
         };
         var b = function (e) {
+                /* FIXME should use info_player['needed_mushroom'] */
                 if (e <= 100) {
                         return Math.floor(e * 25 / 100)
                 } else {
